@@ -31,23 +31,16 @@ let cookieHost = "localhost"
 
 let responseBodySeparator = "RESPONSE-BODY-SEPARATOR"
 
-class TestCookies: XCTestCase {
+class TestCookies: KituraTest {
 
     static var allTests: [(String, (TestCookies) -> () throws -> Void)] {
         return [
             ("testCookieToServerWithSemiColonSeparator", testCookieToServerWithSemiColonSeparator),
             ("testCookieToServerWithSemiColonSpaceSeparator", testCookieToServerWithSemiColonSpaceSeparator),
             ("testCookieToServerWithSemiColonWhitespacesSeparator", testCookieToServerWithSemiColonWhitespacesSeparator),
-            ("testCookieFromServer", testCookieFromServer)
+            ("testCookieFromServer", testCookieFromServer),
+            ("testNoCookies", testNoCookies)
         ]
-    }
-    
-    override func setUp() {
-        doSetUp()
-    }
-
-    override func tearDown() {
-        doTearDown()
     }
 
     let router = TestCookies.setupRouter()
@@ -87,10 +80,10 @@ class TestCookies: XCTestCase {
             }
 
             self.performRequest("get", path: "/1/cookiedump", callback: {response in
-                XCTAssertEqual(response!.statusCode, HTTPStatusCode.OK, "cookiedump route did not match single path request")
+                XCTAssertEqual(response?.statusCode, HTTPStatusCode.OK, "cookiedump route did not match single path request")
                 do {
                     var data = Data()
-                    try response!.readAllData(into: &data)
+                    try response?.readAllData(into: &data)
 
                     let responseBody = String(data: data as Data, encoding: .utf8)
                     if  let responseBody = responseBody {
@@ -110,43 +103,52 @@ class TestCookies: XCTestCase {
     func testCookieFromServer() {
         performServerTest(router, asyncTasks: { expectation in
             self.performRequest("get", path: "/1/sendcookie", callback: {response in
-                XCTAssertEqual(response!.statusCode, HTTPStatusCode.OK, "/1/sendcookie route did not match single path request")
+                XCTAssertEqual(response?.statusCode, HTTPStatusCode.OK, "/1/sendcookie route did not match single path request")
 
-                let (cookie1, cookie1Expire) = self.cookieFrom(response: response!, named: cookie1Name as String)
-                XCTAssert(cookie1 != nil, "Cookie \(cookie1Name) wasn't found in the response.")
-                XCTAssertEqual(cookie1!.value, cookie1Value as String, "Value of Cookie \(cookie1Name) is not \(cookie1Value), was \(cookie1!.value)")
-                XCTAssertEqual(cookie1!.path, "/", "Path of Cookie \(cookie1Name) is not (/), was \(cookie1!.path)")
-                XCTAssertEqual(cookie1!.domain, cookieHost as String, "Domain of Cookie \(cookie1Name) is not \(cookieHost), was \(cookie1!.domain)")
-                XCTAssertFalse(cookie1!.isSecure, "\(cookie1Name) was marked as secure. Should have not been marked so.")
-                XCTAssertNil(cookie1Expire, "\(cookie1Name) had an expiration date. It shouldn't have had one")
+                let (cookie1, cookie1Expire) = self.cookieFrom(response: response, named: cookie1Name as String)
+                XCTAssertNotNil(cookie1, "Cookie \(cookie1Name) wasn't found in the response.")
+                if let cookie1 = cookie1 {
+                    XCTAssertEqual(cookie1.value, cookie1Value as String, "Value of Cookie \(cookie1Name) is not \(cookie1Value), was \(cookie1.value)")
+                    XCTAssertEqual(cookie1.path, "/", "Path of Cookie \(cookie1Name) is not (/), was \(cookie1.path)")
+                    XCTAssertEqual(cookie1.domain, cookieHost as String, "Domain of Cookie \(cookie1Name) is not \(cookieHost), was \(cookie1.domain)")
+                    XCTAssertFalse(cookie1.isSecure, "\(cookie1Name) was marked as secure. Should have not been marked so.")
+                    XCTAssertNil(cookie1Expire, "\(cookie1Name) had an expiration date. It shouldn't have had one")
+                }
 
-                let (cookie2, cookie2Expire) = self.cookieFrom(response: response!, named: cookie2Name as String)
-                XCTAssert(cookie2 != nil, "Cookie \(cookie2Name) wasn't found in the response.")
-                XCTAssertEqual(cookie2!.value, cookie2Value as String, "Value of Cookie \(cookie2Name) is not \(cookie2Value), was \(cookie2!.value)")
-                XCTAssertEqual(cookie2!.path, "/", "Path of Cookie \(cookie2Name) is not (/), was \(cookie2!.path)")
-                XCTAssertEqual(cookie2!.domain, cookieHost as String, "Domain of Cookie \(cookie2Name) is not \(cookieHost), was \(cookie2!.domain)")
-                XCTAssertFalse(cookie2!.isSecure, "\(cookie2Name) was marked as secure. Should have not been marked so.")
-                XCTAssertNotNil(cookie2Expire, "\(cookie2Name) had no expiration date. It should have had one")
-                XCTAssertEqual(cookie2Expire!, SPIUtils.httpDate(cookie2ExpireExpected))
+                let (cookie2, cookie2Expire) = self.cookieFrom(response: response, named: cookie2Name as String)
+                XCTAssertNotNil(cookie2, "Cookie \(cookie2Name) wasn't found in the response.")
+                if let cookie2 = cookie2 {
+                    XCTAssertEqual(cookie2.value, cookie2Value as String, "Value of Cookie \(cookie2Name) is not \(cookie2Value), was \(cookie2.value)")
+                    XCTAssertEqual(cookie2.path, "/", "Path of Cookie \(cookie2Name) is not (/), was \(cookie2.path)")
+                    XCTAssertEqual(cookie2.domain, cookieHost as String, "Domain of Cookie \(cookie2Name) is not \(cookieHost), was \(cookie2.domain)")
+                    XCTAssertFalse(cookie2.isSecure, "\(cookie2Name) was marked as secure. Should have not been marked so.")
+                    XCTAssertNotNil(cookie2Expire, "\(cookie2Name) had no expiration date. It should have had one")
+                    XCTAssertEqual(cookie2Expire, SPIUtils.httpDate(cookie2ExpireExpected))
+                }
                 expectation.fulfill()
             })
         }, { expectation in
             self.performRequest("get", path: "/2/sendcookie", callback: { response in
-                XCTAssertEqual(response!.statusCode, HTTPStatusCode.OK, "/2/sendcookie route did not match single path request")
+                XCTAssertEqual(response?.statusCode, HTTPStatusCode.OK, "/2/sendcookie route did not match single path request")
 
-                let (cookie, cookieExpire) = self.cookieFrom(response: response!, named: cookie3Name as String)
+                let (cookie, cookieExpire) = self.cookieFrom(response: response, named: cookie3Name as String)
                 XCTAssertNotNil(cookie, "Cookie \(cookie3Name) wasn't found in the response.")
-                XCTAssertEqual(cookie!.value, cookie3Value as String, "Value of Cookie \(cookie3Name) is not \(cookie3Value), was \(cookie!.value)")
-                XCTAssertEqual(cookie!.path, "/", "Path of Cookie \(cookie3Name) is not (/), was \(cookie!.path)")
-                XCTAssertEqual(cookie!.domain, cookieHost as String, "Domain of Cookie \(cookie3Name) is not \(cookieHost), was \(cookie!.domain)")
-                XCTAssertTrue(cookie!.isSecure, "\(cookie3Name) wasn't marked as secure. It should have been marked so.")
-                XCTAssertNil(cookieExpire, "\(cookie3Name) had an expiration date. It shouldn't have had one")
+                if let cookie = cookie {
+                    XCTAssertEqual(cookie.value, cookie3Value as String, "Value of Cookie \(cookie3Name) is not \(cookie3Value), was \(cookie.value)")
+                    XCTAssertEqual(cookie.path, "/", "Path of Cookie \(cookie3Name) is not (/), was \(cookie.path)")
+                    XCTAssertEqual(cookie.domain, cookieHost as String, "Domain of Cookie \(cookie3Name) is not \(cookieHost), was \(cookie.domain)")
+                    XCTAssertTrue(cookie.isSecure, "\(cookie3Name) wasn't marked as secure. It should have been marked so.")
+                    XCTAssertNil(cookieExpire, "\(cookie3Name) had an expiration date. It shouldn't have had one")
+                }
                 expectation.fulfill()
             })
         })
     }
 
-    func cookieFrom(response: ClientResponse, named: String) -> (HTTPCookie?, String?) {
+    func cookieFrom(response: ClientResponse?, named: String) -> (HTTPCookie?, String?) {
+        guard let response = response else {
+            return (nil, nil)
+        }
         var resultCookie: HTTPCookie? = nil
         var resultExpire: String?
         for (headerKey, headerValues) in response.headers {
@@ -167,7 +169,7 @@ class TestCookies: XCTestCase {
                         for  part in parts[1..<parts.count] {
                             var pieces = part.components(separatedBy: "=")
                             let piece = pieces[0].lowercased()
-                            switch(piece) {
+                            switch piece {
                             case "secure", "httponly":
                                 let secureValue = "Yes"
                                 properties[HTTPCookiePropertyKey.secure] = secureValue
@@ -194,6 +196,45 @@ class TestCookies: XCTestCase {
         return (resultCookie, resultExpire)
     }
 
+    func testNoCookies() {
+        performServerTest(router, asyncTasks: { expectation in
+            self.performRequest("get", path: "/1/cookiedump", callback: {response in
+                XCTAssertEqual(response?.statusCode, HTTPStatusCode.OK, "cookiedump route did not match single path request")
+                do {
+                    var data = Data()
+                    try response?.readAllData(into: &data)
+
+                    let responseBody = String(data: data as Data, encoding: .utf8)
+                    if  let responseBody = responseBody {
+                        XCTAssertEqual(responseBody, "")
+                    } else {
+                        XCTFail("Response body wasn't an UTF8 string")
+                    }
+                } catch {
+                    XCTFail("Failed reading the body of the response")
+                }
+                expectation.fulfill()
+            })
+        }, { expectation in
+            self.performRequest("get", path: "/1/cookiedump", callback: {response in
+                XCTAssertEqual(response?.statusCode, HTTPStatusCode.OK, "cookiedump route did not match single path request")
+                do {
+                    var data = Data()
+                    try response?.readAllData(into: &data)
+
+                    let responseBody = String(data: data as Data, encoding: .utf8)
+                    if  let responseBody = responseBody {
+                        XCTAssertEqual(responseBody, "")
+                    } else {
+                        XCTFail("Response body wasn't an UTF8 string")
+                    }
+                } catch {
+                    XCTFail("Failed reading the body of the response")
+                }
+                expectation.fulfill()
+            }, headers: ["Cookie": "ploverxyzzy"])
+        })
+    }
 
     static func setupRouter() -> Router {
         let router = Router()

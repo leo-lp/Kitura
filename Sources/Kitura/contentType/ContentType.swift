@@ -19,16 +19,18 @@ import LoggerAPI
 
 // MARK: ContentType
 
-/// A set of APIs to work with Content-Type headers, whether to generate the value
-/// or to determine if it's an acceptable value.
+/**
+ The `ContentType` class provides functions to determine the MIME content type for a given file extension. The user can pass in a complete file name e.g. "foo.png" or just the file extension e.g. "png", or they can pass in both a MIME content type and a file extension and query whether they match.
+ ### Usage Example: ###
+ In this example, a `ContentType` instance is initialised called contentType. This instance is then used to obtain the MIME content type of the file "foo.png", which is identified as "image/png".
+ ```swift
+ let contentType = ContentType.sharedInstance
+ let result = contentType.getContentType(forFileName: "foo.png")
+ print(String(describing: result))
+ // Prints Optional("image/png")
+ ```
+ */
 public class ContentType {
-
-    /// Whether to use the local mime-type definitions or the ones in the file
-    #if os(Linux)
-        private let mimeTypeEmbedded: Bool = true
-    #else
-        private let mimeTypeEmbedded: Bool = false
-    #endif
 
     /// A dictionary of extensions to MIME type descriptions
     private var extToContentType = [String:String]()
@@ -38,20 +40,6 @@ public class ContentType {
 
     /// The following function loads the MIME types from an external file
     private init () {
-        // MARK: Remove this when Linux reading of JSON files works.
-        if mimeTypeEmbedded {
-
-            Log.warning("Loading embedded MIME types.")
-
-            for (contentType, exts) in rawTypes {
-                for ext in exts {
-                    extToContentType[ext] = contentType
-                }
-            }
-
-            return
-        }
-
         let contentTypesData = contentTypesString.data(using: .utf8)
         guard contentTypesData != nil else {
             Log.error("Error parsing \(contentTypesString)")
@@ -60,14 +48,14 @@ public class ContentType {
 
         let jsonParseOptions = JSONSerialization.ReadingOptions.mutableContainers
         let parsedObject = try? JSONSerialization.jsonObject(with: contentTypesData!,
-                                                                   options: jsonParseOptions)
+                                                             options: jsonParseOptions)
 
         // MARK: Linux Foundation will return an Any instead of an AnyObject
         // Need to test if this breaks the Linux build.
         guard parsedObject != nil,
             let jsonData = parsedObject as? [String : [String]] else {
-            Log.error("JSON could not be parsed")
-            return
+                Log.error("JSON could not be parsed")
+                return
         }
 
         for (contentType, exts) in jsonData {
@@ -77,44 +65,68 @@ public class ContentType {
         }
     }
 
-    /// Get the content type for the given file extension.
-    ///
-    /// - Parameter forExtension: the file extension.
-    /// - Returns: an Optional String for the content type.
+    /**
+     Get the content type for the given file extension.
+     ### Usage Example: ###
+     ```swift
+     let contentType = ContentType.sharedInstance
+     let result = contentType.getContentType(forExtension: "js")
+     print(String(describing: result))
+     //Prints Optional("application/javascript")
+     ```
+     - Parameter forExtension: The file extension.
+     - Returns: An Optional String for the content type.
+     */
     public func getContentType(forExtension ext: String) -> String? {
         return extToContentType[ext]
     }
 
-    /// Get the content type for the given file based on its extension.
-    ///
-    /// - Parameter forFileName: the file name.
-    /// - Returns: an Optional String for the content type.
+    /**
+     Get the content type for the given file based on its extension.
+     ### Usage Example: ###
+     ```swift
+     let contentType = ContentType.sharedInstance
+     let result = contentType.getContentType(forFileName: "test.html")
+     print(String(describing: result))
+     //Prints Optional("text/html")
+     ```
+     - Parameter forFileName: The file name.
+     - Returns: An Optional String for the content type.
+     */
     public func getContentType(forFileName fileName: String) -> String? {
         let lastPathElemRange: Range<String.Index>
         let extRange: Range<String.Index>
 
         let backwards = String.CompareOptions.backwards
         if let lastSlash = fileName.range(of: "/", options: backwards) {
-            lastPathElemRange = fileName.index(after: lastSlash.lowerBound)..<fileName.characters.endIndex
+            lastPathElemRange = fileName.index(after: lastSlash.lowerBound)..<fileName.endIndex
         } else {
-            lastPathElemRange = fileName.characters.startIndex..<fileName.characters.endIndex
+            lastPathElemRange = fileName.startIndex..<fileName.endIndex
         }
 
         if let lastDot = fileName.range(of: ".", options: backwards, range: lastPathElemRange) {
-            extRange = fileName.index(after: lastDot.lowerBound)..<fileName.characters.endIndex
+            extRange = fileName.index(after: lastDot.lowerBound)..<fileName.endIndex
         } else {
             // No "extension", use the entire last path element as the "extension"
             extRange = lastPathElemRange
         }
 
-        return getContentType(forExtension: fileName.substring(with: extRange))
+        return getContentType(forExtension: String(fileName[extRange]))
     }
 
-    /// Check if the message content type matches the type descriptor.
-    ///
-    /// - Parameter messageContentType: the content type.
-    /// - Parameter ofType: the description of the type.
-    /// - Returns: true if the types matched.
+    /**
+     Check if the message content type matches the type descriptor.
+     ### Usage Example: ###
+     ```swift
+     let contentType = ContentType.sharedInstance
+     var result = contentType.isContentType("application/json", ofType: "json")
+     print(String(describing: result))
+     //Prints true
+     ```
+     - Parameter messageContentType: The content type.
+     - Parameter ofType: The description of the type.
+     - Returns: True if the types matched.
+     */
     public func isContentType(_ messageContentType: String, ofType typeDescriptor: String) -> Bool {
 
         let type = typeDescriptor.lowercased()
@@ -159,38 +171,16 @@ public class ContentType {
             return "multipart/*"
         case "json":
             return "application/json"
+            // swiftlint:disable todo
             // TODO: +json?
             //            if (type[0] === '+') {
             //                // "+json" -> "*/*+json" expando
             //                type = '*/*' + type
             //            }
+        // swiftlint:enable todo
         default:
             return type
         }
     }
-
-    /// The raw types
-    /// *Note*: This will be removed once JSON parsing and the types.json file can be read.
-    private var rawTypes = [
-        "text/plain": ["txt", "text", "conf", "def", "list", "log", "in", "ini"],
-        "text/html": ["html", "htm"],
-        "text/css": ["css"],
-        "text/csv": ["csv"],
-        "text/xml": [],
-        "text/javascript": [],
-        "text/markdown": [],
-        "text/x-markdown": ["markdown", "md", "mkd"],
-
-        "application/json": ["json", "map"],
-        "application/x-www-form-urlencoded": [],
-        "application/xml": ["xml", "xsl", "xsd"],
-        "application/javascript": ["js"],
-
-        "image/bmp": ["bmp"],
-        "image/png": ["png"],
-        "image/gif": ["gif"],
-        "image/jpeg": ["jpeg", "jpg", "jpe"],
-        "image/svg+xml": ["svg", "svgz"]
-    ]
 
 }

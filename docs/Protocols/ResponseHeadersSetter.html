@@ -8,6 +8,9 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
 
@@ -20,7 +23,13 @@
         <a class="header-link" href="../index.html">
           Kitura Docs
         </a>
-         (98% documented)
+         (99% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
       </p>
     
         <p class="header-col header-col--secondary">
@@ -46,6 +55,9 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/BodyParser.html">BodyParser</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/BodyParserMultiValue.html">BodyParserMultiValue</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/ContentType.html">ContentType</a>
@@ -80,7 +92,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Enums.html">Enums</a>
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/JSONPError.html">JSONPError</a>
@@ -97,6 +109,14 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/DecodingError.html">DecodingError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -105,11 +125,17 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RouterMiddleware.html">RouterMiddleware</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TypeSafeMiddleware.html">TypeSafeMiddleware</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Structs.html">Structs</a>
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/CodableHelpers.html">CodableHelpers</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/HTTPVersion.html">HTTPVersion</a>
               </li>
@@ -128,19 +154,25 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Typealiases.html">Typealiases</a>
+            <a class="nav-group-name-link" href="../Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura16LifecycleHandler">LifecycleHandler</a>
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura14HTTPStatusCodea">HTTPStatusCode</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura13RouterHandler">RouterHandler</a>
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura16LifecycleHandlera">LifecycleHandler</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura22RouterParameterHandler">RouterParameterHandler</a>
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura12RequestErrora">RequestError</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura17WrittenDataFilter">WrittenDataFilter</a>
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura13RouterHandlera">RouterHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura22RouterParameterHandlera">RouterParameterHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura17WrittenDataFiltera">WrittenDataFilter</a>
               </li>
             </ul>
           </li>
@@ -153,7 +185,7 @@
             <h1>ResponseHeadersSetter</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ResponseHeadersSetter</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ResponseHeadersSetter</span></code></pre>
 
                 </div>
               </div>
@@ -170,9 +202,9 @@ the headers of the response of static file serving middleware.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FP6Kitura21ResponseHeadersSetter24setCustomResponseHeadersFT8responseCS_14RouterResponse8filePathSS14fileAttributesGVs10DictionaryVSC16FileAttributeKeyP___T_"></a>
+                    <a name="/s:6Kitura21ResponseHeadersSetterP09setCustombC0yAA06RouterB0C8response_SS8filePaths10DictionaryVySC16FileAttributeKeyVypG0I10AttributestF"></a>
                     <a name="//apple_ref/swift/Method/setCustomResponseHeaders(response:filePath:fileAttributes:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP6Kitura21ResponseHeadersSetter24setCustomResponseHeadersFT8responseCS_14RouterResponse8filePathSS14fileAttributesGVs10DictionaryVSC16FileAttributeKeyP___T_">setCustomResponseHeaders(response:filePath:fileAttributes:)</a>
+                    <a class="token" href="#/s:6Kitura21ResponseHeadersSetterP09setCustombC0yAA06RouterB0C8response_SS8filePaths10DictionaryVySC16FileAttributeKeyVypG0I10AttributestF">setCustomResponseHeaders(response:filePath:fileAttributes:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -182,30 +214,12 @@ the headers of the response of static file serving middleware.</p>
                       <div class="abstract">
                         <p>Set the headers of the response</p>
 
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter response: the router response
-
-</div>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter filePath: the path of the file being served
-
-</div>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter fileAttributes: an array of attributes of the file being served
-
-</div>
-
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">setCustomResponseHeaders</span><span class="p">(</span><span class="nv">response</span><span class="p">:</span> <span class="kt"><a href="../Classes/RouterResponse.html">RouterResponse</a></span><span class="p">,</span> <span class="nv">filePath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fileAttributes</span><span class="p">:</span> <span class="p">[</span><span class="kt">FileAttributeKey</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">])</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setCustomResponseHeaders</span><span class="p">(</span><span class="nv">response</span><span class="p">:</span> <span class="kt"><a href="../Classes/RouterResponse.html">RouterResponse</a></span><span class="p">,</span> <span class="nv">filePath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">fileAttributes</span><span class="p">:</span> <span class="p">[</span><span class="kt">FileAttributeKey</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">])</span></code></pre>
 
                         </div>
                       </div>
@@ -222,7 +236,6 @@ the headers of the response of static file serving middleware.</p>
                               <td>
                                 <div>
                                   <p>the router response</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -235,7 +248,6 @@ the headers of the response of static file serving middleware.</p>
                               <td>
                                 <div>
                                   <p>the path of the file being served</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -248,7 +260,6 @@ the headers of the response of static file serving middleware.</p>
                               <td>
                                 <div>
                                   <p>an array of attributes of the file being served</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -266,8 +277,8 @@ the headers of the response of static file serving middleware.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2016-12-16)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2018-06-01)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

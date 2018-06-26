@@ -14,7 +14,7 @@
  * limitations under the License.
  **/
 
-import Kitura
+@testable import Kitura
 import KituraNet
 
 import Foundation
@@ -27,8 +27,7 @@ import XCTest
     import Darwin
 #endif
 
-
-class TestErrors: XCTestCase {
+class TestErrors: KituraTest {
 
     static var allTests: [(String, (TestErrors) -> () throws -> Void)] {
         return [
@@ -37,32 +36,28 @@ class TestErrors: XCTestCase {
             ("testInvalidHeader", testInvalidHeader)
         ]
     }
-    
-    override func setUp() {
-        doSetUp()
-    }
-
-    override func tearDown() {
-        doTearDown()
-    }
 
     let router = Router()
 
     func testInvalidMethod() {
-        performServerTest(router) { expectation in
+        performServerTest(router, asyncTasks: { expectation in
             self.performRequest("invalid", path: "/qwer", callback: {response in
                 XCTAssertNotNil(response, "ERROR!!! ClientRequest response object was nil")
-                XCTAssertEqual(response!.statusCode, HTTPStatusCode.badRequest, "HTTP Status code was \(response!.statusCode)")
+                XCTAssertEqual(response?.statusCode, HTTPStatusCode.badRequest, "HTTP Status code was \(String(describing: response?.statusCode))")
                 expectation.fulfill()
             })
-        }
+        }, { expectation in
+            let method = RouterMethod(fromRawValue: "PLOVER")
+            XCTAssertEqual(method, .unknown, "Router method should be .unknown, it was \(method)")
+            expectation.fulfill()
+        })
     }
 
     func testInvalidEndpoint() {
         performServerTest(router) { expectation in
             self.performRequest("get", path: "/notreal", callback: {response in
                 XCTAssertNotNil(response, "ERROR!!! ClientRequest response object was nil")
-                XCTAssertEqual(response!.statusCode, HTTPStatusCode.notFound, "HTTP Status code was \(response!.statusCode)")
+                XCTAssertEqual(response?.statusCode, HTTPStatusCode.notFound, "HTTP Status code was \(String(describing: response?.statusCode))")
                 expectation.fulfill()
             })
         }
@@ -75,9 +70,8 @@ class TestErrors: XCTestCase {
                 // should this be ok?
                 expectation.fulfill()
             }) {req in
-                req.headers = ["garbage" : "dfsfdsf"]
+                req.headers = ["garbage": "dfsfdsf"]
             }
         }
     }
-
 }

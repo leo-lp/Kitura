@@ -1,5 +1,5 @@
 /*
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2016,2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import Foundation
 // MARK: StaticFileServer
 
 /// A router middleware that serves static files from a given path.
-public class StaticFileServer: RouterMiddleware {
+open class StaticFileServer: RouterMiddleware {
 
     /// Cache configuration options for StaticFileServer.
     public struct CacheOptions {
@@ -49,6 +49,7 @@ public class StaticFileServer: RouterMiddleware {
         let redirect: Bool
         let serveIndexForDirectory: Bool
         let cacheOptions: CacheOptions
+        let acceptRanges: Bool
 
         /// Initialize an Options instance.
         ///
@@ -62,13 +63,16 @@ public class StaticFileServer: RouterMiddleware {
         /// "/" when the requested path is a directory.
         /// - Parameter cacheOptions: cache options for StaticFileServer.
         public init(possibleExtensions: [String] = [], serveIndexForDirectory: Bool = true,
-             redirect: Bool = true, cacheOptions: CacheOptions = CacheOptions()) {
+             redirect: Bool = true, cacheOptions: CacheOptions = CacheOptions(), acceptRanges: Bool = true) {
             self.possibleExtensions = possibleExtensions
             self.serveIndexForDirectory = serveIndexForDirectory
             self.redirect = redirect
             self.cacheOptions = cacheOptions
+            self.acceptRanges = acceptRanges
         }
     }
+
+    public let absoluteRootPath: String
 
     let fileServer: FileServer
 
@@ -81,7 +85,7 @@ public class StaticFileServer: RouterMiddleware {
     /// the headers of the response.
     public init(path: String = "./public", options: Options = Options(),
                  customResponseHeadersSetter: ResponseHeadersSetter? = nil) {
-        let path = StaticFileServer.ResourcePathHandler.getAbsolutePath(for: path)
+        absoluteRootPath = StaticFileServer.ResourcePathHandler.getAbsolutePath(for: path)
 
         let cacheOptions = options.cacheOptions
         let cacheRelatedHeadersSetter =
@@ -92,29 +96,35 @@ public class StaticFileServer: RouterMiddleware {
         let responseHeadersSetter = CompositeRelatedHeadersSetter(setters: cacheRelatedHeadersSetter,
                                                                   customResponseHeadersSetter)
 
-        fileServer = FileServer(servingFilesPath: path, options: options,
+        fileServer = FileServer(servingFilesPath: absoluteRootPath, options: options,
                                 responseHeadersSetter: responseHeadersSetter)
     }
 
     /// Handle the request - serve static file.
     ///
-    /// - Parameter request: the router request.
-    /// - Parameter response: the router response.
-    /// - Parameter next: the closure for the next execution block.
-    public func handle(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) {
+    /// - Parameter request: The `RouterRequest` object used to work with the incoming
+    ///                     HTTP request.
+    /// - Parameter response: The `RouterResponse` object used to respond to the
+    ///                     HTTP request.
+    /// - Parameter next: The closure called to invoke the next handler or middleware
+    ///                     associated with the request.
+    open func handle(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) {
+        defer {
+            next()
+        }
+
         guard request.serverRequest.method == "GET" || request.serverRequest.method == "HEAD" else {
-            return next()
+            return
         }
 
         guard let filePath = fileServer.getFilePath(from: request) else {
-            return next()
+            return
         }
 
-        guard let requestPath = request.parsedURL.path else {
-            return next()
+        guard let requestPath = request.parsedURLPath.path else {
+            return
         }
 
         fileServer.serveFile(filePath, requestPath: requestPath, response: response)
-        next()
     }
 }

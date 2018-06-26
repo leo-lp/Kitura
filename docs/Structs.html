@@ -1,25 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Structs  Reference</title>
+    <title>Structures  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset="utf-8">
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
 
 
-    <a title="Structs  Reference"></a>
+    <a title="Structures  Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="index.html">
           Kitura Docs
         </a>
-         (98% documented)
+         (99% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
       </p>
     
         <p class="header-col header-col--secondary">
@@ -34,7 +43,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="index.html">Kitura Reference</a>
       <img class="carat" src="img/carat.png" />
-      Structs  Reference
+      Structures  Reference
     </p>
 
     <div class="content-wrapper">
@@ -45,6 +54,9 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/BodyParser.html">BodyParser</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/BodyParserMultiValue.html">BodyParserMultiValue</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/ContentType.html">ContentType</a>
@@ -79,7 +91,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Enums.html">Enums</a>
+            <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/JSONPError.html">JSONPError</a>
@@ -96,6 +108,14 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/DecodingError.html">DecodingError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -104,11 +124,17 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/RouterMiddleware.html">RouterMiddleware</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/TypeSafeMiddleware.html">TypeSafeMiddleware</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Structs.html">Structs</a>
+            <a class="nav-group-name-link" href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/CodableHelpers.html">CodableHelpers</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/HTTPVersion.html">HTTPVersion</a>
               </li>
@@ -127,19 +153,25 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Typealiases.html">Typealiases</a>
+            <a class="nav-group-name-link" href="Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura16LifecycleHandler">LifecycleHandler</a>
+                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura14HTTPStatusCodea">HTTPStatusCode</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura13RouterHandler">RouterHandler</a>
+                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura16LifecycleHandlera">LifecycleHandler</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura22RouterParameterHandler">RouterParameterHandler</a>
+                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura12RequestErrora">RequestError</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura17WrittenDataFilter">WrittenDataFilter</a>
+                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura13RouterHandlera">RouterHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura22RouterParameterHandlera">RouterParameterHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura17WrittenDataFiltera">WrittenDataFilter</a>
               </li>
             </ul>
           </li>
@@ -149,8 +181,8 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>Structs</h1>
-            <p>The following structs are available globally.</p>
+            <h1>Structures</h1>
+            <p>The following structures are available globally.</p>
 
           </div>
         </section>
@@ -162,9 +194,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:V6Kitura7Headers"></a>
-                    <a name="//apple_ref/swift/Struct/Headers" class="dashAnchor"></a>
-                    <a class="token" href="#/s:V6Kitura7Headers">Headers</a>
+                    <a name="/s:6Kitura14CodableHelpersV"></a>
+                    <a name="//apple_ref/swift/Struct/CodableHelpers" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Kitura14CodableHelpersV">CodableHelpers</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -172,16 +204,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The struct containing the HTTP headers and implements the headers APIs for the
-<code><a href="Classes/RouterRequest.html">RouterRequest</a></code> and <code><a href="Classes/RouterResponse.html">RouterResponse</a></code> classes.</p>
+                        <p>Undocumented</p>
 
-                        <a href="Structs/Headers.html" class="slightly-smaller">See more</a>
+                        <a href="Structs/CodableHelpers.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Headers</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CodableHelpers</span></code></pre>
 
                         </div>
                       </div>
@@ -195,9 +226,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:V6Kitura11HTTPVersion"></a>
+                    <a name="/s:6Kitura11HTTPVersionV"></a>
                     <a name="//apple_ref/swift/Struct/HTTPVersion" class="dashAnchor"></a>
-                    <a class="token" href="#/s:V6Kitura11HTTPVersion">HTTPVersion</a>
+                    <a class="token" href="#/s:6Kitura11HTTPVersionV">HTTPVersion</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -215,7 +246,40 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">HTTPVersion</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">HTTPVersion</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Kitura7HeadersV"></a>
+                    <a name="//apple_ref/swift/Struct/Headers" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Kitura7HeadersV">Headers</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The struct containing the HTTP headers and implements the headers APIs for the
+<code><a href="Classes/RouterRequest.html">RouterRequest</a></code> and <code><a href="Classes/RouterResponse.html">RouterResponse</a></code> classes.</p>
+
+                        <a href="Structs/Headers.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Headers</span></code></pre>
 
                         </div>
                       </div>
@@ -236,9 +300,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:V6Kitura9SSLConfig"></a>
+                    <a name="/s:6Kitura9SSLConfigV"></a>
                     <a name="//apple_ref/swift/Struct/SSLConfig" class="dashAnchor"></a>
-                    <a class="token" href="#/s:V6Kitura9SSLConfig">SSLConfig</a>
+                    <a class="token" href="#/s:6Kitura9SSLConfigV">SSLConfig</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -246,9 +310,17 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A struct that allows you to configure your SSL using a CA certificate file (Linux), a CA certificate directory (Linux) or a certificate chain file (MacOS).</p>
 
                         <a href="Structs/SSLConfig.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SSLConfig</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -260,9 +332,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:V6Kitura4Part"></a>
+                    <a name="/s:6Kitura4PartV"></a>
                     <a name="//apple_ref/swift/Struct/Part" class="dashAnchor"></a>
-                    <a class="token" href="#/s:V6Kitura4Part">Part</a>
+                    <a class="token" href="#/s:6Kitura4PartV">Part</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -278,7 +350,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Part</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Part</span></code></pre>
 
                         </div>
                       </div>
@@ -293,8 +365,8 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2016-12-16)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2018-06-01)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

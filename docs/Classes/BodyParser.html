@@ -8,6 +8,9 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
 
@@ -20,7 +23,13 @@
         <a class="header-link" href="../index.html">
           Kitura Docs
         </a>
-         (98% documented)
+         (99% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
       </p>
     
         <p class="header-col header-col--secondary">
@@ -46,6 +55,9 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/BodyParser.html">BodyParser</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/BodyParserMultiValue.html">BodyParserMultiValue</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/ContentType.html">ContentType</a>
@@ -80,7 +92,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Enums.html">Enums</a>
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/JSONPError.html">JSONPError</a>
@@ -97,6 +109,14 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/DecodingError.html">DecodingError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -105,11 +125,17 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RouterMiddleware.html">RouterMiddleware</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TypeSafeMiddleware.html">TypeSafeMiddleware</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Structs.html">Structs</a>
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/CodableHelpers.html">CodableHelpers</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/HTTPVersion.html">HTTPVersion</a>
               </li>
@@ -128,19 +154,25 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Typealiases.html">Typealiases</a>
+            <a class="nav-group-name-link" href="../Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura16LifecycleHandler">LifecycleHandler</a>
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura14HTTPStatusCodea">HTTPStatusCode</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura13RouterHandler">RouterHandler</a>
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura16LifecycleHandlera">LifecycleHandler</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura22RouterParameterHandler">RouterParameterHandler</a>
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura12RequestErrora">RequestError</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura17WrittenDataFilter">WrittenDataFilter</a>
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura13RouterHandlera">RouterHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura22RouterParameterHandlera">RouterParameterHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura17WrittenDataFiltera">WrittenDataFilter</a>
               </li>
             </ul>
           </li>
@@ -153,11 +185,41 @@
             <h1>BodyParser</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BodyParser</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RouterMiddleware.html">RouterMiddleware</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BodyParser</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RouterMiddleware.html">RouterMiddleware</a></span></code></pre>
 
                 </div>
               </div>
-            <p>Router middleware for parsing the body of the request.</p>
+            <p>The <code>BodyParser</code> parses the body of the request prior to sending it to the handler. It reads the Content-Type of the message header and populates the <code><a href="../Classes/RouterRequest.html">RouterRequest</a></code> body field with a corresponding <code><a href="../Enums/ParsedBody.html">ParsedBody</a></code> enumeration.</p>
+
+<p>In order for the BodyParser to be used it must first be registered with any routes that are interested in the <code><a href="../Enums/ParsedBody.html">ParsedBody</a></code> payload.</p>
+<h3 id='parsedbody-enumeration' class='heading'>ParsedBody enumeration:</h3>
+
+<p>The mappings from the incoming Content-Type to an internal representation of the body are as follows:</p>
+<pre class="highlight swift"><code>   <span class="o">.</span><span class="nf">json</span><span class="p">([</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">])</span>          <span class="c1">// "application/json"</span>
+   <span class="o">.</span><span class="nf">text</span><span class="p">(</span><span class="kt">String</span><span class="p">)</span>                 <span class="c1">// "text/*"</span>
+   <span class="o">.</span><span class="nf">urlEncoded</span><span class="p">([</span><span class="kt">String</span><span class="p">:</span><span class="kt">String</span><span class="p">])</span>  <span class="c1">// "application/x-www-form-urlencoded"</span>
+   <span class="o">.</span><span class="nf">multipart</span><span class="p">([</span><span class="kt">Part</span><span class="p">])</span>            <span class="c1">// "multipart/form-data"</span>
+   <span class="o">.</span><span class="nf">raw</span><span class="p">(</span><span class="kt">Data</span><span class="p">)</span>                    <span class="c1">// Any other Content-Type</span>
+</code></pre>
+
+<p>Each case has a corresponding convenience property, e.g. <code>asURLEncoded: [String:String]</code>, for accessing the associated data.</p>
+
+<p><strong>Note</strong>: If you have not declared a Content-Type header, <code><a href="../Enums/ParsedBody.html">ParsedBody</a></code> will be <code>nil</code>.</p>
+<h3 id='usage-example' class='heading'>Usage Example:</h3>
+
+<p>In this example, all routes to the BodyParser middleware are registered to the <code>BodyParser</code> middleware. A request with <q>application/json</q>, ContentType header is received. It is then parsed as JSON and the value for <q>name</q> is returned in the response.</p>
+<pre class="highlight swift"><code><span class="n">router</span><span class="o">.</span><span class="nf">all</span><span class="p">(</span><span class="s">"/name"</span><span class="p">,</span> <span class="nv">middleware</span><span class="p">:</span> <span class="kt">BodyParser</span><span class="p">())</span>
+<span class="n">router</span><span class="o">.</span><span class="nf">post</span><span class="p">(</span><span class="s">"/name"</span><span class="p">)</span> <span class="p">{</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">next</span> <span class="k">in</span>
+    <span class="k">guard</span> <span class="k">let</span> <span class="nv">jsonBody</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">parsedBody</span><span class="p">?</span><span class="o">.</span><span class="n">asJSON</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nf">next</span><span class="p">()</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
+    <span class="k">let</span> <span class="nv">name</span> <span class="o">=</span> <span class="n">jsonBody</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span> <span class="k">as?</span> <span class="kt">String</span> <span class="p">??</span> <span class="s">""</span>
+    <span class="k">try</span> <span class="n">response</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="s">"Hello </span><span class="se">\(</span><span class="n">name</span><span class="se">)</span><span class="s">"</span><span class="p">)</span><span class="o">.</span><span class="nf">end</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre>
+
+<p><strong>Note</strong>: When using Codable Routing in Kitura 2.x the BodyParser should not be registered to any codable routes (doing so will log the following error <q>No data in request. Codable routes do not allow the use of a BodyParser.</q> and the route handler will not be executed).</p>
 
           </div>
         </section>
@@ -169,9 +231,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC6Kitura10BodyParsercFT_S0_"></a>
+                    <a name="/s:6Kitura10BodyParserCACycfc"></a>
                     <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC6Kitura10BodyParsercFT_S0_">init()</a>
+                    <a class="token" href="#/s:6Kitura10BodyParserCACycfc">init()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -180,14 +242,17 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Initializes a BodyParser instance.
-Needed since default initalizer is internal.</p>
+ Needed since default initalizer is internal.</p>
+<h3 id='usage-example' class='heading'>Usage Example:</h3>
+<pre class="highlight swift"><code> <span class="k">let</span> <span class="nv">middleware</span> <span class="o">=</span> <span class="kt">BodyParser</span><span class="p">()</span>
+</code></pre>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -197,9 +262,9 @@ Needed since default initalizer is internal.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC6Kitura10BodyParser6handleFzT7requestCS_13RouterRequest8responseCS_14RouterResponse4nextFT_T__T_"></a>
+                    <a name="/s:6Kitura10BodyParserC6handleyAA13RouterRequestC7request_AA0E8ResponseC8responseyyc4nexttKF"></a>
                     <a name="//apple_ref/swift/Method/handle(request:response:next:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC6Kitura10BodyParser6handleFzT7requestCS_13RouterRequest8responseCS_14RouterResponse4nextFT_T__T_">handle(request:response:next:)</a>
+                    <a class="token" href="#/s:6Kitura10BodyParserC6handleyAA13RouterRequestC7request_AA0E8ResponseC8responseyyc4nexttKF">handle(request:response:next:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -207,32 +272,14 @@ Needed since default initalizer is internal.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Handle the request, i.e. parse the body of the request.</p>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter request: the router request.
-
-</div>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter response: the router response.
-
-</div>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter next: the closure for the next execution block.
-
-</div>
+                        <p>This function is called by the Kitura <code><a href="../Classes/Router.html">Router</a></code> when an incoming request matches the route provided when the BodyParser was registered with the <code><a href="../Classes/Router.html">Router</a></code>. It performs the parsing of the body content using <code>parse(_:contentType)</code>. We don&rsquo;t expect a user to call this function directly.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">handle</span><span class="p">(</span><span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Classes/RouterRequest.html">RouterRequest</a></span><span class="p">,</span> <span class="nv">response</span><span class="p">:</span> <span class="kt"><a href="../Classes/RouterResponse.html">RouterResponse</a></span><span class="p">,</span> <span class="nv">next</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">handle</span><span class="p">(</span><span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Classes/RouterRequest.html">RouterRequest</a></span><span class="p">,</span> <span class="nv">response</span><span class="p">:</span> <span class="kt"><a href="../Classes/RouterResponse.html">RouterResponse</a></span><span class="p">,</span> <span class="nv">next</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -248,8 +295,8 @@ Needed since default initalizer is internal.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>the router request.</p>
-
+                                  <p>The <code><a href="../Classes/RouterRequest.html">RouterRequest</a></code> object used to work with the incoming
+                HTTP request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -261,8 +308,8 @@ Needed since default initalizer is internal.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>the router response.</p>
-
+                                  <p>The <code><a href="../Classes/RouterResponse.html">RouterResponse</a></code> object used to respond to the
+                HTTP request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -274,8 +321,8 @@ Needed since default initalizer is internal.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>the closure for the next execution block.</p>
-
+                                  <p>The closure called to invoke the next handler or middleware
+                associated with the request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -288,9 +335,9 @@ Needed since default initalizer is internal.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZFC6Kitura10BodyParser5parseFTCS_13RouterRequest11contentTypeGSqSS__GSqOS_10ParsedBody_"></a>
+                    <a name="/s:6Kitura10BodyParserC5parseAA06ParsedB0OSgAA13RouterRequestC_SSSg11contentTypetFZ"></a>
                     <a name="//apple_ref/swift/Method/parse(_:contentType:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZFC6Kitura10BodyParser5parseFTCS_13RouterRequest11contentTypeGSqSS__GSqOS_10ParsedBody_">parse(_:contentType:)</a>
+                    <a class="token" href="#/s:6Kitura10BodyParserC5parseAA06ParsedB0OSgAA13RouterRequestC_SSSg11contentTypetFZ">parse(_:contentType:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -298,32 +345,19 @@ Needed since default initalizer is internal.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Parse the body of the incoming message.</p>
+                        <p>This function is called by the Kitura <code><a href="../Classes/Router.html">Router</a></code> when an incoming request matches the route provided when the BodyParser was registered with the <code><a href="../Classes/Router.html">Router</a></code>. The <code>middleware.handle(...)</code> function will parse the body content of an incoming request using this function. A user can call this function directly but ordinarily won&rsquo;t need to.</p>
+<h3 id='usage-example' class='heading'>Usage Example:</h3>
 
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter message: message coming from the socket.
-
-</div>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter contentType: the content type as a String.
-
-</div>
-
-<div class="aside aside-returns">
-    <p class="aside-title">Returns</p>
-    the parsed body.
-
-</div>
+<p>In this example, the body of the request is parsed to be of the passed in contentType.</p>
+<pre class="highlight swift"><code><span class="n">request</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="kt">BodyParser</span><span class="o">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="nv">contentType</span><span class="p">:</span> <span class="n">contentType</span><span class="p">)</span>
+</code></pre>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">parse</span><span class="p">(</span><span class="n">_</span> <span class="nv">message</span><span class="p">:</span> <span class="kt"><a href="../Classes/RouterRequest.html">RouterRequest</a></span><span class="p">,</span> <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Enums/ParsedBody.html">ParsedBody</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">parse</span><span class="p">(</span><span class="n">_</span> <span class="nv">message</span><span class="p">:</span> <span class="kt"><a href="../Classes/RouterRequest.html">RouterRequest</a></span><span class="p">,</span> <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Enums/ParsedBody.html">ParsedBody</a></span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -339,8 +373,7 @@ Needed since default initalizer is internal.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>message coming from the socket.</p>
-
+                                  <p>Message coming from the socket.</p>
                                 </div>
                               </td>
                             </tr>
@@ -352,8 +385,7 @@ Needed since default initalizer is internal.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>the content type as a String.</p>
-
+                                  <p>The content type as a String.</p>
                                 </div>
                               </td>
                             </tr>
@@ -362,8 +394,7 @@ Needed since default initalizer is internal.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>the parsed body.</p>
-
+                        <p>The parsed body.</p>
                       </div>
                     </section>
                   </div>
@@ -371,9 +402,9 @@ Needed since default initalizer is internal.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZFC6Kitura10BodyParser12readBodyDataFzT4withCS_13RouterRequest_V10Foundation4Data"></a>
+                    <a name="/s:6Kitura10BodyParserC04readB4Data10Foundation0E0VAA13RouterRequestC4with_tKFZ"></a>
                     <a name="//apple_ref/swift/Method/readBodyData(with:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZFC6Kitura10BodyParser12readBodyDataFzT4withCS_13RouterRequest_V10Foundation4Data">readBodyData(with:)</a>
+                    <a class="token" href="#/s:6Kitura10BodyParserC04readB4Data10Foundation0E0VAA13RouterRequestC4with_tKFZ">readBodyData(with:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -382,22 +413,14 @@ Needed since default initalizer is internal.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Read the body data of the request.</p>
+<h3 id='usage-example' class='heading'>Usage Example:</h3>
 
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter with: the socket reader.
-
-</div>
-
+<p>In this example, the body of the request is read into a constant (called bodyData) using an instance of <code><a href="../Classes/RouterRequest.html">RouterRequest</a></code> (called request).</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">bodyData</span> <span class="o">=</span> <span class="k">try</span> <span class="nf">readBodyData</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">request</span><span class="p">)</span>
+</code></pre>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     Socket.Error if an error occurred while reading from a socket.
-
-</div>
-
-<div class="aside aside-returns">
-    <p class="aside-title">Returns</p>
-    data for the body.
 
 </div>
 
@@ -406,7 +429,7 @@ Needed since default initalizer is internal.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">readBodyData</span><span class="p">(</span><span class="n">with</span> <span class="nv">reader</span><span class="p">:</span> <span class="kt"><a href="../Classes/RouterRequest.html">RouterRequest</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">readBodyData</span><span class="p">(</span><span class="n">with</span> <span class="nv">reader</span><span class="p">:</span> <span class="kt"><a href="../Classes/RouterRequest.html">RouterRequest</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
 
                         </div>
                       </div>
@@ -422,8 +445,7 @@ Needed since default initalizer is internal.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>the socket reader.</p>
-
+                                  <p>The socket reader.</p>
                                 </div>
                               </td>
                             </tr>
@@ -432,8 +454,7 @@ Needed since default initalizer is internal.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>data for the body.</p>
-
+                        <p>The body data associated with the request.</p>
                       </div>
                     </section>
                   </div>
@@ -446,8 +467,8 @@ Needed since default initalizer is internal.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2016-12-16)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2018-06-01)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

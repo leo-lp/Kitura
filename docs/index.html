@@ -8,6 +8,9 @@
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
 
@@ -19,7 +22,13 @@
         <a class="header-link" href="index.html">
           Kitura Docs
         </a>
-         (98% documented)
+         (99% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
       </p>
     
         <p class="header-col header-col--secondary">
@@ -45,6 +54,9 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/BodyParser.html">BodyParser</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/BodyParserMultiValue.html">BodyParserMultiValue</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/ContentType.html">ContentType</a>
@@ -79,7 +91,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Enums.html">Enums</a>
+            <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/JSONPError.html">JSONPError</a>
@@ -96,6 +108,14 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/DecodingError.html">DecodingError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -104,11 +124,17 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/RouterMiddleware.html">RouterMiddleware</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/TypeSafeMiddleware.html">TypeSafeMiddleware</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Structs.html">Structs</a>
+            <a class="nav-group-name-link" href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/CodableHelpers.html">CodableHelpers</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/HTTPVersion.html">HTTPVersion</a>
               </li>
@@ -127,19 +153,25 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Typealiases.html">Typealiases</a>
+            <a class="nav-group-name-link" href="Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura16LifecycleHandler">LifecycleHandler</a>
+                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura14HTTPStatusCodea">HTTPStatusCode</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura13RouterHandler">RouterHandler</a>
+                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura16LifecycleHandlera">LifecycleHandler</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura22RouterParameterHandler">RouterParameterHandler</a>
+                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura12RequestErrora">RequestError</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura17WrittenDataFilter">WrittenDataFilter</a>
+                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura13RouterHandlera">RouterHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura22RouterParameterHandlera">RouterParameterHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura17WrittenDataFiltera">WrittenDataFilter</a>
               </li>
             </ul>
           </li>
@@ -150,21 +182,37 @@
         <section class="section">
           <div class="section-content">
             
-            <p><img src="https://raw.githubusercontent.com/IBM-Swift/Kitura/master/Documentation/KituraLogo.png" alt="Kitura"></p>
+            <p align="center">
+<a href="http://kitura.io/">
+<img src="https://raw.githubusercontent.com/IBM-Swift/Kitura/master/Documentation/KituraLogo-wide.png" height="100" alt="Kitura">
+</a>
+<p align="center"><strong>A Swift Web Framework and HTTP Server</strong></p>
+</p>
 
-<p><strong>A Swift Web Framework and HTTP Server</strong></p>
-
-<p><a href="https://travis-ci.org/IBM-Swift/Kitura"><img src="https://travis-ci.org/IBM-Swift/Kitura.svg?branch=master" alt="Build Status - Master"></a>
+<p align="center">
+<a href="http://www.kitura.io/en/api/">
+<img src="https://img.shields.io/badge/docs-kitura.io-1FBCE4.svg" alt="Docs">
+</a>
+<a href="https://travis-ci.org/IBM-Swift/Kitura">
+<img src="https://travis-ci.org/IBM-Swift/Kitura.svg?branch=master" alt="Build Status - Master">
+</a>
 <img src="https://img.shields.io/badge/os-macOS-green.svg?style=flat" alt="macOS">
 <img src="https://img.shields.io/badge/os-linux-green.svg?style=flat" alt="Linux">
 <img src="https://img.shields.io/badge/license-Apache2-blue.svg?style=flat" alt="Apache 2">
-<a href="https://codecov.io/gh/IBM-Swift/Kitura"><img src="https://codecov.io/gh/IBM-Swift/Kitura/branch/master/graph/badge.svg" alt="codecov"></a>
-<a href="https://codebeat.co/projects/github-com-ibm-swift-kitura"><img src="https://codebeat.co/badges/d2d1cb10-e587-44b7-b63a-0a76ffb7bd96" alt="codebeat badge"></a>
-&nbsp;<a href="http://swift-at-ibm-slack.mybluemix.net/"><img src="http://swift-at-ibm-slack.mybluemix.net/badge.svg" alt="Slack Status"></a></p>
-<a href='#summary' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='summary'>Summary</h2>
+<a href="https://codecov.io/gh/IBM-Swift/Kitura">
+<img src="https://codecov.io/gh/IBM-Swift/Kitura/branch/master/graph/badge.svg" alt="codecov">
+</a>
+<a href="https://codebeat.co/projects/github-com-ibm-swift-kitura">
+<img src="https://codebeat.co/badges/d2d1cb10-e587-44b7-b63a-0a76ffb7bd96" alt="codebeat badge">
+</a>
+<a href="http://swift-at-ibm-slack.mybluemix.net/">
+<img src="http://swift-at-ibm-slack.mybluemix.net/badge.svg" alt="Slack Status">
+</a>
+</p>
+<h2 id='summary' class='heading'>Summary</h2>
 
 <p>Kitura is a web framework and web server that is created for web services written in Swift. For more information, visit <a href="http://www.kitura.io">www.kitura.io</a>.</p>
-<a href='#table-of-contents' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='table-of-contents'>Table of Contents</h2>
+<h2 id='table-of-contents' class='heading'>Table of Contents</h2>
 
 <ul>
 <li><a href="#summary">Summary</a></li>
@@ -173,21 +221,21 @@
 <li><a href="#contributing-to-kitura">Contributing to Kitura</a></li>
 <li><a href="#community">Community</a></li>
 </ul>
-<a href='#features' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='features'>Features</h2>
+<h2 id='features' class='heading'>Features</h2>
 
 <ul>
-<li>URL routing (GET, POST, PUT, DELETE)</li>
+<li>URL routing (e.g., GET, POST, PUT, DELETE, PATCH)</li>
+<li>Codable routing</li>
 <li>URL parameters</li>
 <li>Static file serving</li>
 <li><a href="https://github.com/IBM-Swift/Kitura/blob/master/Documentation/FastCGI.md">FastCGI support</a></li>
 <li>SSL/TLS support</li>
-<li>JSON parsing</li>
 <li>Pluggable middleware</li>
 </ul>
-<a href='#getting-started' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='getting-started'>Getting Started</h2>
+<h2 id='getting-started' class='heading'>Getting Started</h2>
 
 <p>Visit <a href="http://www.kitura.io/">www.kitura.io</a> for a Getting Started guide, tutorials, and API reference documentation.</p>
-<a href='#contributing-to-kitura' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='contributing-to-kitura'>Contributing to Kitura</h2>
+<h2 id='contributing-to-kitura' class='heading'>Contributing to Kitura</h2>
 
 <p>All improvements to Kitura are very welcome! Here&rsquo;s how to get started with developing Kitura itself.</p>
 
@@ -203,8 +251,8 @@
 
 <p><code>$ swift test</code></p>
 
-<p>You can find more info on contributing to Kitura in our <a href=".github/CONTRIBUTING.md">contributing guidelines</a>.</p>
-<a href='#community' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='community'>Community</h2>
+<p>You can find more info on contributing to Kitura in our <a href="https://github.com/IBM-Swift/Kitura/blob/master/.github/CONTRIBUTING.md">contributing guidelines</a>.</p>
+<h2 id='community' class='heading'>Community</h2>
 
 <p>We love to talk server-side Swift, and Kitura. Join our <a href="http://swift-at-ibm-slack.mybluemix.net/">Slack</a> to meet the team!</p>
 
@@ -215,8 +263,8 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2016-12-16)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2018-06-01)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

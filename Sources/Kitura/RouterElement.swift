@@ -1,5 +1,5 @@
 /*
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2016, 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,11 +29,10 @@ class RouterElement {
     private let pattern: String?
 
     /// The regular expression
-    #if os(Linux)
-        private var regex: RegularExpression?
-    #else
-        private var regex: NSRegularExpression?
-    #endif
+    private var regex: NSRegularExpression?
+
+    /// The pattern is a simple string
+    private var isSimpleString = false
 
     /// The list of keys
     private var keys: [String]?
@@ -62,14 +61,14 @@ class RouterElement {
     init(method: RouterMethod, pattern: String?, middleware: [RouterMiddleware],
          allowPartialMatch: Bool = true, mergeParameters: Bool = false) {
         self.method = method
-        self.pattern = pattern
+        self.pattern = pattern?.hasPrefix("/") ?? true ? pattern : "/" + (pattern ?? "")
         self.regex = nil
         self.keys = nil
         self.middlewares = middleware
         self.allowPartialMatch = allowPartialMatch
         self.mergeParameters = mergeParameters
 
-        (regex, keys) = RouteRegex.sharedInstance.buildRegex(fromPattern: pattern, allowPartialMatch: allowPartialMatch)
+        (regex, isSimpleString, keys) = RouteRegex.sharedInstance.buildRegex(fromPattern: pattern, allowPartialMatch: allowPartialMatch)
     }
 
     /// Convenience initializer
@@ -82,18 +81,30 @@ class RouterElement {
 
     /// Process
     ///
-    /// - Parameter request: the request
-    /// - Parameter response: the response
-    /// - Parameter next: the callback
+    /// - Parameter request: The `RouterRequest` object used to work with the incoming
+    ///                     HTTP request.
+    /// - Parameter response: The `RouterResponse` object used to respond to the
+    ///                     HTTP request.
+    /// - Parameter parameterWalker: The `RouterParameterWalker` for the list of parameter
+    ///                             handlers.
+    /// - Parameter next: The closure called to invoke the next handler or middleware
+    ///                     associated with the request.
     func process(request: RouterRequest, response: RouterResponse, parameterWalker: RouterParameterWalker, next: @escaping () -> Void) {
-        guard let path = request.parsedURL.path else {
+        guard let path = request.parsedURLPath.path else {
             Log.error("Failed to process request (path is nil)")
+            next()
             return
         }
 
         guard (response.error != nil && method == .error)
             || (response.error == nil && (method == request.method || method == .all)) else {
-            next()
+                next()
+                return
+        }
+
+        // Check and see if the pattern is just a simple string
+        guard !isSimpleString else {
+            performSimpleMatch(path: path, request: request, response: response, next: next)
             return
         }
 
@@ -107,9 +118,10 @@ class RouterElement {
             return
         }
 
+        // The pattern is a regular expression that needs to be checked
         let nsPath = NSString(string: path)
 
-        guard let match = regex.firstMatch(in: path, options: [], range: NSMakeRange(0, path.characters.count)) else {
+        guard let match = regex.firstMatch(in: path, options: [], range: NSRange(location: 0, length: path.count)) else {
             next()
             return
         }
@@ -125,6 +137,52 @@ class RouterElement {
         }
     }
 
+    /// Perform a simple match
+    ///
+    /// - Parameter path: The path being matched.
+    /// - Parameter request: The `RouterRequest` object used to work with the incoming
+    ///                     HTTP request.
+    /// - Parameter response: The `RouterResponse` object used to respond to the
+    ///                     HTTP request.
+    /// - Parameter next: The closure called to invoke the next handler or middleware
+    ///                     associated with the request.
+    private func performSimpleMatch(path: String, request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) {
+        guard let pattern = pattern else {
+            next()
+            return
+        }
+
+        let pathToMatch = path.isEmpty ? "/" : path
+        var matched: Bool
+        let matchedPath: String
+
+        if allowPartialMatch {
+            matched = pathToMatch.hasPrefix(pattern)
+            if matched && pattern != "/" {
+                let patternCount = pattern.count
+                if pathToMatch.count > patternCount {
+                    matched = pathToMatch[pathToMatch.index(pathToMatch.startIndex, offsetBy: patternCount)] == "/"
+                }
+            }
+            matchedPath = matched && !pattern.isEmpty && pattern != "/" ? pattern : ""
+        }
+        else {
+            matched = pathToMatch == pattern
+            matchedPath = matched ? pathToMatch : ""
+        }
+
+        if matched {
+            request.matchedPath = matchedPath
+            request.allowPartialMatch = allowPartialMatch
+            request.parameters = mergeParameters ? request.parameters : [:]
+            request.route = pattern
+            processHelper(request: request, response: response, next: next)
+        }
+        else {
+            next()
+        }
+    }
+
     /// Process the helper
     ///
     /// - Parameter request: the request
@@ -135,26 +193,17 @@ class RouterElement {
         looper.next()
     }
 
-    #if os(Linux)
-        typealias TextCheckingResultType = TextCheckingResult
-    #else
-        typealias TextCheckingResultType = NSTextCheckingResult
-    #endif
-
     /// Update the request parameters
     ///
     /// - Parameter match: the regular expression result
     /// - Parameter request:
-    private func setParameters(forRequest request: RouterRequest, fromUrlPath urlPath: NSString, match: TextCheckingResultType) {
+    private func setParameters(forRequest request: RouterRequest, fromUrlPath urlPath: NSString, match: NSTextCheckingResult) {
         var parameters = mergeParameters ? request.parameters : [:]
 
         if let keys = keys {
             for index in 0..<keys.count {
-                #if os(Linux)
-                    let matchRange = match.range(at: index+1)
-                #else
-                    let matchRange = match.rangeAt(index+1)
-                #endif
+                let matchRange = match.range(at: index+1)
+
                 if  matchRange.location != NSNotFound  &&  matchRange.location != -1  {
                     var parameter = urlPath.substring(with: matchRange)
                     if let decodedParameter = parameter.removingPercentEncoding {

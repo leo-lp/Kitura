@@ -1,25 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Typealiases  Reference</title>
+    <title>Type Aliases  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset="utf-8">
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
 
 
-    <a title="Typealiases  Reference"></a>
+    <a title="Type Aliases  Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="index.html">
           Kitura Docs
         </a>
-         (98% documented)
+         (99% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
       </p>
     
         <p class="header-col header-col--secondary">
@@ -34,7 +43,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="index.html">Kitura Reference</a>
       <img class="carat" src="img/carat.png" />
-      Typealiases  Reference
+      Type Aliases  Reference
     </p>
 
     <div class="content-wrapper">
@@ -45,6 +54,9 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/BodyParser.html">BodyParser</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/BodyParserMultiValue.html">BodyParserMultiValue</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/ContentType.html">ContentType</a>
@@ -79,7 +91,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Enums.html">Enums</a>
+            <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/JSONPError.html">JSONPError</a>
@@ -96,6 +108,14 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/DecodingError.html">DecodingError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -104,11 +124,17 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/RouterMiddleware.html">RouterMiddleware</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/TypeSafeMiddleware.html">TypeSafeMiddleware</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Structs.html">Structs</a>
+            <a class="nav-group-name-link" href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/CodableHelpers.html">CodableHelpers</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/HTTPVersion.html">HTTPVersion</a>
               </li>
@@ -127,19 +153,25 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Typealiases.html">Typealiases</a>
+            <a class="nav-group-name-link" href="Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura16LifecycleHandler">LifecycleHandler</a>
+                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura14HTTPStatusCodea">HTTPStatusCode</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura13RouterHandler">RouterHandler</a>
+                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura16LifecycleHandlera">LifecycleHandler</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura22RouterParameterHandler">RouterParameterHandler</a>
+                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura12RequestErrora">RequestError</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura17WrittenDataFilter">WrittenDataFilter</a>
+                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura13RouterHandlera">RouterHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura22RouterParameterHandlera">RouterParameterHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Typealiases.html#/s:6Kitura17WrittenDataFiltera">WrittenDataFilter</a>
               </li>
             </ul>
           </li>
@@ -149,8 +181,8 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>Typealiases</h1>
-            <p>The following typealiases are available globally.</p>
+            <h1>Type Aliases</h1>
+            <p>The following type aliases are available globally.</p>
 
           </div>
         </section>
@@ -162,9 +194,75 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6Kitura13RouterHandler"></a>
+                    <a name="/s:6Kitura12RequestErrora"></a>
+                    <a name="//apple_ref/swift/Alias/RequestError" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Kitura12RequestErrora">RequestError</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bridge <a href="https://ibm-swift.github.io/KituraContracts/Structs/RequestError.html">RequestError</a>
+from <a href="https://ibm-swift.github.io/KituraContracts">KituraContracts</a> so that you only need to import
+<code><a href="Classes/Kitura.html">Kitura</a></code> to access it.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">RequestError</span> <span class="o">=</span> <span class="kt">KituraContracts</span><span class="o">.</span><span class="kt">RequestError</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Kitura14HTTPStatusCodea"></a>
+                    <a name="//apple_ref/swift/Alias/HTTPStatusCode" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Kitura14HTTPStatusCodea">HTTPStatusCode</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bridge <a href="http://ibm-swift.github.io/Kitura-net/Enums/HTTPStatusCode.html">HTTPStatusCode</a>
+from <a href="http://ibm-swift.github.io/Kitura-net">KituraNet</a> so that you only need to import
+<code><a href="Classes/Kitura.html">Kitura</a></code> to access it.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">HTTPStatusCode</span> <span class="o">=</span> <span class="kt">KituraNet</span><span class="o">.</span><span class="kt">HTTPStatusCode</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Kitura13RouterHandlera"></a>
                     <a name="//apple_ref/swift/Alias/RouterHandler" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Kitura13RouterHandler">RouterHandler</a>
+                    <a class="token" href="#/s:6Kitura13RouterHandlera">RouterHandler</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -175,33 +273,12 @@
                         <p>The definition of the closure type that is used by the <code><a href="Classes/Router.html">Router</a></code> class
 when routing HTTP requests to closure.</p>
 
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter request: The <code><a href="Classes/RouterRequest.html">RouterRequest</a></code> object that is used to work with
-                the incoming request.
-
-</div>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter response: The <code><a href="Classes/RouterResponse.html">RouterResponse</a></code> object used to send responses
-                 to the HTTP request.
-
-</div>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter next: The closure to invoke to cause the router to inspect the
-             path in the list of paths.
-
-</div>
-
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">RouterHandler</span> <span class="o">=</span> <span class="p">(</span><span class="kt"><a href="Classes/RouterRequest.html">RouterRequest</a></span><span class="p">,</span> <span class="kt"><a href="Classes/RouterResponse.html">RouterResponse</a></span><span class="p">,</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">RouterHandler</span> <span class="o">=</span> <span class="p">(</span><span class="kt"><a href="Classes/RouterRequest.html">RouterRequest</a></span><span class="p">,</span> <span class="kt"><a href="Classes/RouterResponse.html">RouterResponse</a></span><span class="p">,</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
 
                         </div>
                       </div>
@@ -217,8 +294,8 @@ when routing HTTP requests to closure.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The <code>RouterRequest</code> object that is used to work with the incoming request.</p>
-
+                                  <p>The <code><a href="Classes/RouterRequest.html">RouterRequest</a></code> object used to work with the incoming
+                HTTP request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -230,8 +307,8 @@ when routing HTTP requests to closure.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The <code>RouterResponse</code> object used to send responses to the HTTP request.</p>
-
+                                  <p>The <code><a href="Classes/RouterResponse.html">RouterResponse</a></code> object used to respond to the
+                HTTP request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -243,8 +320,8 @@ when routing HTTP requests to closure.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The closure to invoke to cause the router to inspect the path in the list of paths.</p>
-
+                                  <p>The closure called to invoke the next handler or middleware
+                associated with the request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -261,9 +338,9 @@ when routing HTTP requests to closure.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6Kitura22RouterParameterHandler"></a>
+                    <a name="/s:6Kitura22RouterParameterHandlera"></a>
                     <a name="//apple_ref/swift/Alias/RouterParameterHandler" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Kitura22RouterParameterHandler">RouterParameterHandler</a>
+                    <a class="token" href="#/s:6Kitura22RouterParameterHandlera">RouterParameterHandler</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -271,8 +348,93 @@ when routing HTTP requests to closure.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A <a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Declarations.html#//apple_ref/doc/uid/TP40014097-CH34-ID361">type alias</a> declaration to describe a handler for named parameters when using <code><a href="Classes/Router.html#/s:6Kitura6RouterC9parameterACSS_yAA0B7RequestC_AA0B8ResponseCSSyyctKc7handlerdtF">Router.parameter(...)</a></code>. The example below shows two ways to use it, both as a function named <code>handler</code> to handle the <q>id</q> parameter and as a closure to handle the <q>name</q> parameter.</p>
+<h3 id='usage-example' class='heading'>Usage Example:</h3>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">router</span> <span class="o">=</span> <span class="kt">Router</span><span class="p">()</span>
+<span class="kd">func</span> <span class="nf">handler</span><span class="p">(</span><span class="nv">request</span><span class="p">:</span> <span class="kt">RouterRequest</span><span class="p">,</span> <span class="nv">response</span><span class="p">:</span> <span class="kt">RouterResponse</span><span class="p">,</span> <span class="nv">param</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">next</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="p">{</span>
+    <span class="c1">//Code to handle id parameter here</span>
+    <span class="nf">next</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="n">router</span><span class="o">.</span><span class="nf">parameter</span><span class="p">(</span><span class="s">"id"</span><span class="p">,</span> <span class="nv">handler</span><span class="p">:</span> <span class="n">handler</span><span class="p">)</span>
 
+<span class="n">router</span><span class="o">.</span><span class="nf">parameter</span><span class="p">(</span><span class="s">"name"</span><span class="p">)</span> <span class="p">{</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">next</span> <span class="k">in</span>
+    <span class="c1">//Code to handle name parameter here</span>
+    <span class="nf">next</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="n">router</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"/item/:id"</span><span class="p">)</span> <span class="p">{</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">next</span> <span class="k">in</span>
+    <span class="c1">//This will be reached after the id parameter is handled by `handler`</span>
+<span class="p">}</span>
+<span class="n">router</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"/user/:name"</span><span class="p">)</span> <span class="p">{</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">next</span> <span class="k">in</span>
+    <span class="c1">//This will be reached after the name parameter is handled by the closure above</span>
+<span class="p">}</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">RouterParameterHandler</span> <span class="o">=</span> <span class="p">(</span><span class="kt"><a href="Classes/RouterRequest.html">RouterRequest</a></span><span class="p">,</span> <span class="kt"><a href="Classes/RouterResponse.html">RouterResponse</a></span><span class="p">,</span> <span class="kt">String</span><span class="p">,</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>request</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="Classes/RouterRequest.html">RouterRequest</a></code> object used to work with the incoming
+                HTTP request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>response</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="Classes/RouterResponse.html">RouterResponse</a></code> object used to respond to the
+                HTTP request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>param</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The named parameter to be handled.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>next</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The closure called to invoke the next handler or middleware
+                associated with the request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -291,36 +453,9 @@ when routing HTTP requests to closure.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6Kitura17WrittenDataFilter"></a>
-                    <a name="//apple_ref/swift/Alias/WrittenDataFilter" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Kitura17WrittenDataFilter">WrittenDataFilter</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Type alias for written data filter, i.e. pre-write lifecycle handler.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">WrittenDataFilter</span> <span class="o">=</span> <span class="p">(</span><span class="kt">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Kitura16LifecycleHandler"></a>
+                    <a name="/s:6Kitura16LifecycleHandlera"></a>
                     <a name="//apple_ref/swift/Alias/LifecycleHandler" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Kitura16LifecycleHandler">LifecycleHandler</a>
+                    <a class="token" href="#/s:6Kitura16LifecycleHandlera">LifecycleHandler</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -335,7 +470,34 @@ when routing HTTP requests to closure.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">LifecycleHandler</span> <span class="o">=</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">LifecycleHandler</span> <span class="o">=</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Kitura17WrittenDataFiltera"></a>
+                    <a name="//apple_ref/swift/Alias/WrittenDataFilter" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Kitura17WrittenDataFiltera">WrittenDataFilter</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Type alias for written data filter, i.e. pre-write lifecycle handler.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">WrittenDataFilter</span> <span class="o">=</span> <span class="p">(</span><span class="kt">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
 
                         </div>
                       </div>
@@ -350,8 +512,8 @@ when routing HTTP requests to closure.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2016-12-16)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2018-06-01)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

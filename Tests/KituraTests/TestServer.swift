@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2016, 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,31 +17,32 @@
 import XCTest
 import Dispatch
 
-import Kitura
+import KituraNet
+@testable import Kitura
 
-class TestServer: XCTestCase {
+class TestServer: KituraTest {
 
     static var allTests: [(String, (TestServer) -> () throws -> Void)] {
         return [
             ("testServerStartStop", testServerStartStop),
             ("testServerRun", testServerRun),
-            ("testServerFail", testServerFail)
+            ("testServerFail", testServerFail),
+            ("testServerRestart", testServerRestart)
         ]
     }
 
+    let httpPort = 8080
+    let fastCgiPort = 9000
+
     override func setUp() {
-        doSetUp()
+        super.setUp()
+        stopServer() // stop common server so we can run these tests
     }
 
-    override func tearDown() {
-        doTearDown()
-    }
-
-    private func setupServerAndExpectations(expectStart: Bool, expectStop: Bool, expectFail: Bool,
-                                            httpPort: Int = 8090, fastCgiPort: Int = 9000) {
+    private func setupServerAndExpectations(expectStart: Bool, expectStop: Bool, expectFail: Bool, httpPort: Int?=nil, fastCgiPort: Int?=nil) {
         let router = Router()
-        let httpServer = Kitura.addHTTPServer(onPort: httpPort, with: router)
-        let fastCgiServer = Kitura.addFastCGIServer(onPort: fastCgiPort, with: router)
+        let httpServer = Kitura.addHTTPServer(onPort: httpPort ?? self.httpPort, with: router)
+        let fastCgiServer = Kitura.addFastCGIServer(onPort: fastCgiPort ?? self.fastCgiPort, with: router)
 
         if expectStart {
             let httpStarted = expectation(description: "HTTPServer started()")
@@ -103,7 +104,7 @@ class TestServer: XCTestCase {
             Kitura.stop()
         }
 
-        waitExpectation(timeout: 10) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error)
         }
     }
@@ -116,24 +117,73 @@ class TestServer: XCTestCase {
             Kitura.run()
         }
 
-        waitExpectation(timeout: 10) { error in
+        waitForExpectations(timeout: 10) { error in
             Kitura.stop()
             XCTAssertNil(error)
         }
     }
 
     func testServerFail() {
+        // setupServer startup should fail as we are passing in illegal ports
         setupServerAndExpectations(expectStart: false, expectStop: false, expectFail: true,
-                                   httpPort: -1, fastCgiPort: -1)
+                                   httpPort: -1, fastCgiPort: -2)
 
         let requestQueue = DispatchQueue(label: "Request queue")
         requestQueue.async() {
             Kitura.start()
         }
 
-        waitExpectation(timeout: 10) { error in
+        waitForExpectations(timeout: 10) { error in
             Kitura.stop()
             XCTAssertNil(error)
         }
+    }
+
+    func testServerRestart() {
+        let port = httpPort
+        let path = "/testServerRestart"
+        let body = "Server is running."
+
+        let router = Router()
+        router.get(path) { _, response, next in
+            response.send(body)
+            next()
+        }
+
+        let server = Kitura.addHTTPServer(onPort: port, with: router)
+        server.sslConfig = KituraTest.sslConfig.config
+
+        let stopped = DispatchSemaphore(value: 0)
+        server.stopped {
+            stopped.signal()
+        }
+
+        Kitura.start()
+        testResponse(port: port, path: path, expectedBody: body)
+        Kitura.stop(unregister: false)
+        stopped.wait()
+
+        XCTAssertEqual(Kitura.httpServersAndPorts.count, 1, "Kitura.httpServersAndPorts.count is \(Kitura.httpServersAndPorts.count), should be 1")
+        testResponse(port: port, path: path, expectedBody: nil, expectedStatus: nil)
+
+        Kitura.start()
+        testResponse(port: port, path: path, expectedBody: body)
+        Kitura.stop() // default for unregister is true
+
+        XCTAssertEqual(Kitura.httpServersAndPorts.count, 0, "Kitura.httpServersAndPorts.count is \(Kitura.httpServersAndPorts.count), should be 0")
+    }
+
+    private func testResponse(port: Int, method: String = "get", path: String, expectedBody: String?, expectedStatus: HTTPStatusCode? = HTTPStatusCode.OK) {
+
+        performRequest(method, path: path, port: port, useSSL: true, callback: { response in
+            let status = response?.statusCode
+            XCTAssertEqual(status, expectedStatus, "status was \(String(describing: status)), expected \(String(describing: expectedStatus))")
+            do {
+                let body = try response?.readString()
+                XCTAssertEqual(body, expectedBody, "body was '\(String(describing: body))', expected '\(String(describing: expectedBody))'")
+            } catch {
+                XCTFail("Error reading body: \(error)")
+            }
+        })
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2016, 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,26 +20,21 @@ import Foundation
 
 // MARK RouteRegex
 
-#if os(Linux)
-    typealias RegularExpressionType = RegularExpression
-#else
-    typealias RegularExpressionType = NSRegularExpression
-#endif
-
 /// A set of helper functions for router path matching using regular expression.
 public class RouteRegex {
     /// A shared instance of RouteRegex.
     public static let sharedInstance = RouteRegex()
 
-    private let namedCaptureRegex: RegularExpressionType
-    private let unnamedCaptureRegex: RegularExpressionType
-    private let keyRegex: RegularExpressionType
-    private let nonKeyRegex: RegularExpressionType
+    private let namedCaptureRegex: NSRegularExpression
+    private let unnamedCaptureRegex: NSRegularExpression
+    private let keyRegex: NSRegularExpression
+    private let nonKeyRegex: NSRegularExpression
+    private let complexRouteCharacters = CharacterSet(charactersIn: "*.:+?()[]\\")
 
     private init() {
         do {
-            namedCaptureRegex = try RegularExpressionType(pattern: "(.*)?(?:\\:(\\w+)(?:\\(((?:\\\\.|[^()])+)\\))?(?:([+*?])?))", options: [])
-            unnamedCaptureRegex = try RegularExpressionType(pattern: "(.*)?(?:(?:\\(((?:\\\\.|[^()])+)\\))(?:([+*?])?))", options: [])
+            namedCaptureRegex = try NSRegularExpression(pattern: "(.*)?(?:\\:(\\w+)(?:\\(((?:\\\\.|[^()])+)\\))?(?:([+*?])?))", options: [])
+            unnamedCaptureRegex = try NSRegularExpression(pattern: "(.*)?(?:(?:\\(((?:\\\\.|[^()])+)\\))(?:([+*?])?))", options: [])
             keyRegex = namedCaptureRegex
             nonKeyRegex = unnamedCaptureRegex
         } catch {
@@ -52,10 +47,16 @@ public class RouteRegex {
     ///
     /// - Parameter pattern: Optional string
     /// - Parameter allowPartialMatch: True if a partial match is allowed. Defaults to false.
-    /// - Returns: A tuple of the compiled `RegularExpressionType?` and array of keys
-    internal func buildRegex(fromPattern: String?, allowPartialMatch: Bool = false) -> (RegularExpressionType?, [String]?) {
+    /// - Returns: A tuple of the compiled `NSRegularExpression?`, a bool as to whether or not
+    ///            this is a simple String compare, and array of keys
+    internal func buildRegex(fromPattern: String?, allowPartialMatch: Bool = false) -> (NSRegularExpression?, Bool, [String]?) {
         guard let pattern = fromPattern else {
-            return (nil, nil)
+            return (nil, false, nil)
+        }
+
+        // Check and see if the pattern is a simple string (no captures and not a regular expression)
+        if pattern.rangeOfCharacter(from: complexRouteCharacters) == nil {
+            return (nil, true, nil)
         }
 
         var regexStr = "^"
@@ -70,104 +71,93 @@ public class RouteRegex {
         }
 
         if allowPartialMatch {
+            // Allows the route to match exactly, or match any additional text after its trailing '/'
+            // i.e. the route defined on the path "/hello" will match "/hello/foo/bar"
             regexStr.append("(?:/(?=$))?(?=/|$)")
-        }
-        else {
+        } else {
+            // Allows the route to match exactly, or with a trailing '/'
+            // i.e. the route defined on the path "/hello" will match only "/hello" or "/hello/"
             regexStr.append("(?:/(?=$))?$")
         }
 
-        var regex: RegularExpressionType? = nil
+        var regex: NSRegularExpression? = nil
         do {
-            regex = try RegularExpressionType(pattern: regexStr, options: [])
+            regex = try NSRegularExpression(pattern: regexStr, options: [])
         } catch {
             Log.error("Failed to compile the regular expression for the route \(pattern)")
         }
 
-        return (regex, keys)
+        return (regex, false, keys)
     }
 
     func handlePath(_ path: String, regexStr: String, keys: [String], nonKeyIndex: Int) ->
         (regexStr: String, keys: [String], nonKeyIndex: Int) {
-        var nonKeyIndex = nonKeyIndex
-        var keys = keys
-        var regexStr = regexStr
+            var nonKeyIndex = nonKeyIndex
+            var keys = keys
+            var regexStr = regexStr
 
-        // If there was a leading slash, there will be an empty component in the split
-        if  path.isEmpty {
+            // If there was a leading slash, there will be an empty component in the split
+            if  path.isEmpty {
+                return (regexStr, keys, nonKeyIndex)
+            }
+
+            let (matched, prefix, matchExp, plusQuestStar) =
+                matchRangesInPath(path, nonKeyIndex: &nonKeyIndex, keys: &keys)
+
+            let toAppend: String
+            if  matched { // A path element with no capture
+                toAppend = getStringToAppendToRegex(plusQuestStar: plusQuestStar,
+                                                    prefix: prefix, matchExp: matchExp)
+            } else {
+                toAppend = "/\(path)"  // A path element with no capture
+            }
+            regexStr.append(toAppend)
+
             return (regexStr, keys, nonKeyIndex)
-        }
-
-        let (matched, prefix, matchExp, plusQuestStar) =
-            matchRangesInPath(path, nonKeyIndex: &nonKeyIndex, keys: &keys)
-
-        let toAppend: String
-        if  matched { // A path element with no capture
-            toAppend = getStringToAppendToRegex(plusQuestStar: plusQuestStar,
-                                                prefix: prefix, matchExp: matchExp)
-        } else {
-            toAppend = "/\(path)"  // A path element with no capture
-        }
-        regexStr.append(toAppend)
-
-        return (regexStr, keys, nonKeyIndex)
     }
 
     func matchRangesInPath(_ path: String, nonKeyIndex: inout Int, keys: inout [String]) ->
         (match: Bool, prefix: String, matchExp: String, plusQuestStar: String) {
-        var matched = false
-        var prefix = ""
-        var matchExp = "[^/]+?"
-        var plusQuestStar = ""
+            var matched = false
+            var prefix = ""
+            var matchExp = "[^/]+?"
+            var plusQuestStar = ""
 
-        if  path == "*" {
-            // Handle a path element of * specially
-            return (true, prefix, ".*", plusQuestStar)
-        }
+            if  path == "*" {
+                // Handle a path element of * specially
+                return (true, prefix, ".*", plusQuestStar)
+            }
 
-        let range = NSMakeRange(0, path.characters.count)
+            let range = NSRange(location: 0, length: path.count)
             let nsPath = NSString(string: path)           // Needed for substring
 
-        if let keyMatch = keyRegex.firstMatch(in: path, options: [], range: range) {
-            // We found a path element with a named/key capture
-            extract(fromPath: nsPath, with: keyMatch, at: 1, to: &prefix)
-            extract(fromPath: nsPath, with: keyMatch, at: 3, to: &matchExp)
-            extract(fromPath: nsPath, with: keyMatch, at: 4, to: &plusQuestStar)
+            if let keyMatch = keyRegex.firstMatch(in: path, options: [], range: range) {
+                // We found a path element with a named/key capture
+                extract(fromPath: nsPath, with: keyMatch, at: 1, to: &prefix)
+                extract(fromPath: nsPath, with: keyMatch, at: 3, to: &matchExp)
+                extract(fromPath: nsPath, with: keyMatch, at: 4, to: &plusQuestStar)
 
-            #if os(Linux)
                 let keyMatchRange = keyMatch.range(at: 2)
-            #else
-                let keyMatchRange = keyMatch.rangeAt(2)
-            #endif
-            
-            keys.append(nsPath.substring(with: keyMatchRange))
-            matched = true
-        } else if let nonKeyMatch = nonKeyRegex.firstMatch(in: path, options: [], range: range) {
-            // We found a path element with an unnamed capture
-            extract(fromPath: nsPath, with: nonKeyMatch, at: 1, to: &prefix)
-            extract(fromPath: nsPath, with: nonKeyMatch, at: 2, to: &matchExp)
-            extract(fromPath: nsPath, with: nonKeyMatch, at: 3, to: &plusQuestStar)
+                keys.append(nsPath.substring(with: keyMatchRange))
+                matched = true
+            } else if let nonKeyMatch = nonKeyRegex.firstMatch(in: path, options: [], range: range) {
+                // We found a path element with an unnamed capture
+                extract(fromPath: nsPath, with: nonKeyMatch, at: 1, to: &prefix)
+                extract(fromPath: nsPath, with: nonKeyMatch, at: 2, to: &matchExp)
+                extract(fromPath: nsPath, with: nonKeyMatch, at: 3, to: &plusQuestStar)
 
-            keys.append(String(nonKeyIndex))
-            nonKeyIndex+=1
-            matched = true
-        }
+                keys.append(String(nonKeyIndex))
+                nonKeyIndex+=1
+                matched = true
+            }
 
-        return (matched, prefix, matchExp, plusQuestStar)
+            return (matched, prefix, matchExp, plusQuestStar)
     }
 
-    #if os(Linux)
-    typealias TextCheckingResultType = TextCheckingResult
-    #else
-    typealias TextCheckingResultType = NSTextCheckingResult
-    #endif
-
-    func extract(fromPath path: NSString, with match: TextCheckingResultType, at index: Int,
+    func extract(fromPath path: NSString, with match: NSTextCheckingResult, at index: Int,
                  to string: inout String) {
-        #if os(Linux)
-            let range = match.range(at: index)
-        #else
-            let range = match.rangeAt(index)
-        #endif
+        let range = match.range(at: index)
+
         if  range.location != NSNotFound  &&  range.location != -1 {
             string = path.substring(with: range)
         }
@@ -177,7 +167,7 @@ public class RouteRegex {
                                   matchExp: String) -> String {
         // We have some kind of capture for this path element
         // Build the runtime regex depending on whether or not there is "repetition"
-        switch(plusQuestStar) {
+        switch plusQuestStar {
         case "+":
             return "/\(prefix)(\(matchExp)(?:/\(matchExp))*)"
         case "?":

@@ -1,26 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ParsedBody Enum Reference</title>
+    <title>ParsedBody Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
 
     <a name="//apple_ref/swift/Enum/ParsedBody" class="dashAnchor"></a>
 
-    <a title="ParsedBody Enum Reference"></a>
+    <a title="ParsedBody Enumeration Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="../index.html">
           Kitura Docs
         </a>
-         (98% documented)
+         (99% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
       </p>
     
         <p class="header-col header-col--secondary">
@@ -35,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">Kitura Reference</a>
       <img class="carat" src="../img/carat.png" />
-      ParsedBody Enum Reference
+      ParsedBody Enumeration Reference
     </p>
 
     <div class="content-wrapper">
@@ -46,6 +55,9 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/BodyParser.html">BodyParser</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/BodyParserMultiValue.html">BodyParserMultiValue</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/ContentType.html">ContentType</a>
@@ -80,7 +92,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Enums.html">Enums</a>
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/JSONPError.html">JSONPError</a>
@@ -97,6 +109,14 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/DecodingError.html">DecodingError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -105,11 +125,17 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RouterMiddleware.html">RouterMiddleware</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TypeSafeMiddleware.html">TypeSafeMiddleware</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Structs.html">Structs</a>
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/CodableHelpers.html">CodableHelpers</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/HTTPVersion.html">HTTPVersion</a>
               </li>
@@ -128,19 +154,25 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Typealiases.html">Typealiases</a>
+            <a class="nav-group-name-link" href="../Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura16LifecycleHandler">LifecycleHandler</a>
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura14HTTPStatusCodea">HTTPStatusCode</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura13RouterHandler">RouterHandler</a>
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura16LifecycleHandlera">LifecycleHandler</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura22RouterParameterHandler">RouterParameterHandler</a>
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura12RequestErrora">RequestError</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura17WrittenDataFilter">WrittenDataFilter</a>
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura13RouterHandlera">RouterHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura22RouterParameterHandlera">RouterParameterHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura17WrittenDataFiltera">WrittenDataFilter</a>
               </li>
             </ul>
           </li>
@@ -153,13 +185,13 @@
             <h1>ParsedBody</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">indirect</span> <span class="kd">enum</span> <span class="kt">ParsedBody</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">indirect</span> <span class="kd">enum</span> <span class="kt">ParsedBody</span></code></pre>
 
                 </div>
               </div>
             <p>The result of parsing the body of the request.</p>
 
-<p>When a body of a request is parsed the results of the parsing are placed 
+<p>When a body of a request is parsed the results of the parsing are placed
 in the associated value of the enum case based on Content-Type</p>
 
           </div>
@@ -172,41 +204,9 @@ in the associated value of the enum case based on Content-Type</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura10ParsedBody4jsonFMS0_FV10SwiftyJSON4JSONS0_"></a>
-                    <a name="//apple_ref/swift/Element/json" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura10ParsedBody4jsonFMS0_FV10SwiftyJSON4JSONS0_">json</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>If the content type was <q>application/json</q> this associated value will 
-contain the body of a JSON object.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">json</span><span class="p">(</span><span class="kt">JSON</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:FO6Kitura10ParsedBody10urlEncodedFMS0_FGVs10DictionarySSSS_S0_"></a>
+                    <a name="/s:6Kitura10ParsedBodyO10urlEncodedACs10DictionaryVyS2SGcACmF"></a>
                     <a name="//apple_ref/swift/Element/urlEncoded" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura10ParsedBody10urlEncodedFMS0_FGVs10DictionarySSSS_S0_">urlEncoded</a>
+                    <a class="token" href="#/s:6Kitura10ParsedBodyO10urlEncodedACs10DictionaryVyS2SGcACmF">urlEncoded</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -214,7 +214,7 @@ contain the body of a JSON object.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>If the content type was <q>application/x-www-form-urlencoded</q> this 
+                        <p>If the content type was <q>application/x-www-form-urlencoded</q> this
 associated value will contain a representation of the body as a
 dictionary of key-value pairs.</p>
 
@@ -223,7 +223,7 @@ dictionary of key-value pairs.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">urlEncoded</span><span class="p">([</span><span class="kt">String</span><span class="p">:</span><span class="kt">String</span><span class="p">])</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">urlEncoded</span><span class="p">([</span><span class="kt">String</span><span class="p">:</span><span class="kt">String</span><span class="p">])</span></code></pre>
 
                         </div>
                       </div>
@@ -237,9 +237,42 @@ dictionary of key-value pairs.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura10ParsedBody4textFMS0_FSSS0_"></a>
+                    <a name="/s:6Kitura10ParsedBodyO20urlEncodedMultiValueACs10DictionaryVySSSaySSGGcACmF"></a>
+                    <a name="//apple_ref/swift/Element/urlEncodedMultiValue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Kitura10ParsedBodyO20urlEncodedMultiValueACs10DictionaryVySSSaySSGGcACmF">urlEncodedMultiValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If the content type was <q>application/x-www-form-urlencoded</q> this
+associated value will contain a representation of the body as a
+dictionary of key-[value] pairs.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">urlEncodedMultiValue</span><span class="p">([</span><span class="kt">String</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]])</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Kitura10ParsedBodyO4textACSScACmF"></a>
                     <a name="//apple_ref/swift/Element/text" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura10ParsedBody4textFMS0_FSSS0_">text</a>
+                    <a class="token" href="#/s:6Kitura10ParsedBodyO4textACSScACmF">text</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -255,7 +288,7 @@ representation of the body as a String.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">text</span><span class="p">(</span><span class="kt">String</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">text</span><span class="p">(</span><span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -269,9 +302,9 @@ representation of the body as a String.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura10ParsedBody3rawFMS0_FV10Foundation4DataS0_"></a>
+                    <a name="/s:6Kitura10ParsedBodyO3rawAC10Foundation4DataVcACmF"></a>
                     <a name="//apple_ref/swift/Element/raw" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura10ParsedBody3rawFMS0_FV10Foundation4DataS0_">raw</a>
+                    <a class="token" href="#/s:6Kitura10ParsedBodyO3rawAC10Foundation4DataVcACmF">raw</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -286,7 +319,7 @@ representation of the body as a String.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">raw</span><span class="p">(</span><span class="kt">Data</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">raw</span><span class="p">(</span><span class="kt">Data</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -300,9 +333,9 @@ representation of the body as a String.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura10ParsedBody9multipartFMS0_FGSaVS_4Part_S0_"></a>
+                    <a name="/s:6Kitura10ParsedBodyO9multipartACSayAA4PartVGcACmF"></a>
                     <a name="//apple_ref/swift/Element/multipart" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura10ParsedBody9multipartFMS0_FGSaVS_4Part_S0_">multipart</a>
+                    <a class="token" href="#/s:6Kitura10ParsedBodyO9multipartACSayAA4PartVGcACmF">multipart</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -318,7 +351,7 @@ contain an array of parts of multi-part respresentation of the body.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">multipart</span><span class="p">([</span><span class="kt"><a href="../Structs/Part.html">Part</a></span><span class="p">])</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">multipart</span><span class="p">([</span><span class="kt"><a href="../Structs/Part.html">Part</a></span><span class="p">])</span></code></pre>
 
                         </div>
                       </div>
@@ -332,9 +365,41 @@ contain an array of parts of multi-part respresentation of the body.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vO6Kitura10ParsedBody6asJSONGSqV10SwiftyJSON4JSON_"></a>
+                    <a name="/s:6Kitura10ParsedBodyO4jsonACs10DictionaryVySSypGcACmF"></a>
+                    <a name="//apple_ref/swift/Element/json" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Kitura10ParsedBodyO4jsonACs10DictionaryVySSypGcACmF">json</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If the content type was <q>application/json</q> this associated value will
+contain the body of a [String: Any] json dictionary object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">json</span><span class="p">([</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Kitura10ParsedBodyO6asJSONs10DictionaryVySSypGSgvp"></a>
                     <a name="//apple_ref/swift/Property/asJSON" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vO6Kitura10ParsedBody6asJSONGSqV10SwiftyJSON4JSON_">asJSON</a>
+                    <a class="token" href="#/s:6Kitura10ParsedBodyO6asJSONs10DictionaryVySSypGSgvp">asJSON</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -344,26 +409,19 @@ contain an array of parts of multi-part respresentation of the body.</p>
                       <div class="abstract">
                         <p>Extract a <q>JSON</q> body from the <code>ParsedBody</code> enum</p>
 
-<div class="aside aside-returns">
-    <p class="aside-title">Returns</p>
-    The parsed body as a JSON object, or nil if the body wasn&rsquo;t in
-      JSON format.
-
-</div>
-
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">asJSON</span><span class="p">:</span> <span class="kt">JSON</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">asJSON</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]?</span></code></pre>
 
                         </div>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>The parsed body as a JSON object, or nil if the body wasn’t in JSON format.</p>
-
+                        <p>The parsed body as a [String: Any] object, or nil if the body wasn&rsquo;t in
+      JSON format.</p>
                       </div>
                     </section>
                   </div>
@@ -371,9 +429,9 @@ contain an array of parts of multi-part respresentation of the body.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vO6Kitura10ParsedBody11asMultiPartGSqGSaVS_4Part__"></a>
+                    <a name="/s:6Kitura10ParsedBodyO11asMultiPartSayAA0F0VGSgvp"></a>
                     <a name="//apple_ref/swift/Property/asMultiPart" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vO6Kitura10ParsedBody11asMultiPartGSqGSaVS_4Part__">asMultiPart</a>
+                    <a class="token" href="#/s:6Kitura10ParsedBodyO11asMultiPartSayAA0F0VGSgvp">asMultiPart</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -383,26 +441,19 @@ contain an array of parts of multi-part respresentation of the body.</p>
                       <div class="abstract">
                         <p>Extract a <q>multipart</q> body from the <code>ParsedBody</code> enum</p>
 
-<div class="aside aside-returns">
-    <p class="aside-title">Returns</p>
-    The parsed body as an array of <code><a href="../Structs/Part.html">Part</a></code> structs, or nil if the body wasn&rsquo;t in
-      multi-part form format.
-
-</div>
-
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">asMultiPart</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Part.html">Part</a></span><span class="p">]?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">asMultiPart</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Part.html">Part</a></span><span class="p">]?</span></code></pre>
 
                         </div>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>The parsed body as an array of <code><a href="../Structs/Part.html">Part</a></code> structs, or nil if the body wasn’t in multi-part form format.</p>
-
+                        <p>The parsed body as an array of <code><a href="../Structs/Part.html">Part</a></code> structs, or nil if the body wasn&rsquo;t in
+      multi-part form format.</p>
                       </div>
                     </section>
                   </div>
@@ -410,9 +461,40 @@ contain an array of parts of multi-part respresentation of the body.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vO6Kitura10ParsedBody6asTextGSqSS_"></a>
+                    <a name="/s:6Kitura10ParsedBodyO5asRaw10Foundation4DataVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/asRaw" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Kitura10ParsedBodyO5asRaw10Foundation4DataVSgvp">asRaw</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Extract a <q>raw</q> body from the <code>ParsedBody</code> enum</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">asRaw</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The <q>raw</q> body as a Data, or nil if the body wasn&rsquo;t in raw format.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Kitura10ParsedBodyO6asTextSSSgvp"></a>
                     <a name="//apple_ref/swift/Property/asText" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vO6Kitura10ParsedBody6asTextGSqSS_">asText</a>
+                    <a class="token" href="#/s:6Kitura10ParsedBodyO6asTextSSSgvp">asText</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -422,25 +504,18 @@ contain an array of parts of multi-part respresentation of the body.</p>
                       <div class="abstract">
                         <p>Extract a <q>text</q> body from the <code>ParsedBody</code> enum</p>
 
-<div class="aside aside-returns">
-    <p class="aside-title">Returns</p>
-    The <q>text</q> body as a String, or nil if the body wasn&rsquo;t in text format.
-
-</div>
-
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">asText</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">asText</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>The “text” body as a String, or nil if the body wasn’t in text format.</p>
-
+                        <p>The <q>text</q> body as a String, or nil if the body wasn&rsquo;t in text format.</p>
                       </div>
                     </section>
                   </div>
@@ -448,9 +523,9 @@ contain an array of parts of multi-part respresentation of the body.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vO6Kitura10ParsedBody12asURLEncodedGSqGVs10DictionarySSSS__"></a>
+                    <a name="/s:6Kitura10ParsedBodyO12asURLEncodeds10DictionaryVyS2SGSgvp"></a>
                     <a name="//apple_ref/swift/Property/asURLEncoded" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vO6Kitura10ParsedBody12asURLEncodedGSqGVs10DictionarySSSS__">asURLEncoded</a>
+                    <a class="token" href="#/s:6Kitura10ParsedBodyO12asURLEncodeds10DictionaryVyS2SGSgvp">asURLEncoded</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -458,28 +533,55 @@ contain an array of parts of multi-part respresentation of the body.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Extract a <q>urlEncoded</q> body from the <code>ParsedBody</code> enum</p>
-
-<div class="aside aside-returns">
-    <p class="aside-title">Returns</p>
-    The parsed body as a Dictionary<String, String>, or nil if the body wasn&rsquo;t in
-      url encoded form format.
-
-</div>
+                        <p>Extract a <q>urlEncoded</q> body from the <code>ParsedBody</code> enum with comma-
+separated values.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">asURLEncoded</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span><span class="kt">String</span><span class="p">]?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">asURLEncoded</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span><span class="kt">String</span><span class="p">]?</span></code></pre>
 
                         </div>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>The parsed body as a Dictionary<String, String>, or nil if the body wasn’t in url encoded form format.</p>
+                        <p>The parsed body as a Dictionary<String, String>, or nil if the body wasn&rsquo;t in
+      url encoded form format.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Kitura10ParsedBodyO22asURLEncodedMultiValues10DictionaryVySSSaySSGGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/asURLEncodedMultiValue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Kitura10ParsedBodyO22asURLEncodedMultiValues10DictionaryVySSSaySSGGSgvp">asURLEncodedMultiValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Extract a <q>urlEncoded</q> body from the <code>ParsedBody</code> enum with values in
+an array..</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">asURLEncodedMultiValue</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]]?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The parsed body as a Dictionary<String, Array<String>&gt;, or
+       nil if the body wasn&rsquo;t in url encoded form format.</p>
                       </div>
                     </section>
                   </div>
@@ -492,8 +594,8 @@ contain an array of parts of multi-part respresentation of the body.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2016-12-16)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2018-06-01)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

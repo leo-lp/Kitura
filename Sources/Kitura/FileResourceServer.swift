@@ -1,5 +1,5 @@
 /*
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2016, 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,19 +39,38 @@ class FileResourceServer {
     }
 
     private func getFilePath(for resource: String) -> String? {
+        var candidatePath: String? = nil
+        var basePath: String? = nil
         let fileManager = FileManager.default
         var potentialResource = getResourcePathBasedOnSourceLocation(for: resource)
 
         if potentialResource.hasSuffix("/") {
             potentialResource += "index.html"
         }
-        
+
         let fileExists = fileManager.fileExists(atPath: potentialResource)
         if fileExists {
-            return potentialResource
+            candidatePath = potentialResource
+            basePath = getResourcePathBasedOnSourceLocation(for: "")
         } else {
-            return getResourcePathBasedOnCurrentDirectory(for: resource, withFileManager: fileManager)
+            candidatePath = getResourcePathBasedOnCurrentDirectory(for: resource, withFileManager: fileManager)
+            basePath = getResourcePathBasedOnCurrentDirectory(for: "", withFileManager: fileManager)
         }
+        // We need to ensure we are only serving kitura resources so need to decode the file path and then check it has Sources/Kitura/resources before the last element
+        guard isValidPath(resourcePath: candidatePath, basePath: basePath) else {
+            return nil
+        }
+        return candidatePath
+    }
+
+    func isValidPath(resourcePath: String?, basePath: String?) -> Bool {
+        guard let resource = resourcePath,
+            let base = basePath,
+            let absoluteBasePath = NSURL(fileURLWithPath: base).standardizingPath?.absoluteString,
+            let standardisedPath = NSURL(fileURLWithPath: resource).standardizingPath?.absoluteString else {
+            return false
+        }
+        return  standardisedPath.hasPrefix(absoluteBasePath)
     }
 
     private func getResourcePathBasedOnSourceLocation(for resource: String) -> String {
@@ -59,26 +78,37 @@ class FileResourceServer {
         let resourceFilePrefixRange: NSRange
         let lastSlash = fileName.range(of: "/", options: .backwards)
         if  lastSlash.location != NSNotFound {
-            resourceFilePrefixRange = NSMakeRange(0, lastSlash.location+1)
+            resourceFilePrefixRange = NSRange(location: 0, length: lastSlash.location+1)
         } else {
-            resourceFilePrefixRange = NSMakeRange(0, fileName.length)
+            resourceFilePrefixRange = NSRange(location: 0, length: fileName.length)
         }
         return fileName.substring(with: resourceFilePrefixRange) + "resources/" + resource
     }
 
     private func getResourcePathBasedOnCurrentDirectory(for resource: String, withFileManager fileManager: FileManager) -> String? {
-        do {
-            let packagePath = fileManager.currentDirectoryPath + "/Packages"
-            let packages = try fileManager.contentsOfDirectory(atPath: packagePath)
-            for package in packages {
-                let potentialResource = "\(packagePath)/\(package)/Sources/Kitura/resources/\(resource)"
-                let resourceExists = fileManager.fileExists(atPath: potentialResource)
-                if resourceExists {
-                    return potentialResource
+        for suffix in ["/Packages", "/.build/checkouts"] {
+            let packagePath: String
+            #if os(iOS)
+                guard let resourcePath = Bundle.main.resourcePath else {
+                    continue
                 }
+                packagePath = resourcePath + suffix
+            #else
+                packagePath = fileManager.currentDirectoryPath + suffix
+            #endif
+
+            do {
+                let packages = try fileManager.contentsOfDirectory(atPath: packagePath)
+                for package in packages {
+                    let potentialResource = "\(packagePath)/\(package)/Sources/Kitura/resources/\(resource)"
+                    let resourceExists = fileManager.fileExists(atPath: potentialResource)
+                    if resourceExists {
+                        return potentialResource
+                    }
+                }
+            } catch {
+              Log.error("No packages found in \(packagePath)")
             }
-        } catch {
-            return nil
         }
         return nil
     }

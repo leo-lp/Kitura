@@ -1,26 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>RouterMethod Enum Reference</title>
+    <title>RouterMethod Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
 
     <a name="//apple_ref/swift/Enum/RouterMethod" class="dashAnchor"></a>
 
-    <a title="RouterMethod Enum Reference"></a>
+    <a title="RouterMethod Enumeration Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="../index.html">
           Kitura Docs
         </a>
-         (98% documented)
+         (99% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
       </p>
     
         <p class="header-col header-col--secondary">
@@ -35,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">Kitura Reference</a>
       <img class="carat" src="../img/carat.png" />
-      RouterMethod Enum Reference
+      RouterMethod Enumeration Reference
     </p>
 
     <div class="content-wrapper">
@@ -46,6 +55,9 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/BodyParser.html">BodyParser</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/BodyParserMultiValue.html">BodyParserMultiValue</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/ContentType.html">ContentType</a>
@@ -80,7 +92,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Enums.html">Enums</a>
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/JSONPError.html">JSONPError</a>
@@ -97,6 +109,14 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/DecodingError.html">DecodingError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -105,11 +125,17 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RouterMiddleware.html">RouterMiddleware</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TypeSafeMiddleware.html">TypeSafeMiddleware</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Structs.html">Structs</a>
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/CodableHelpers.html">CodableHelpers</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/HTTPVersion.html">HTTPVersion</a>
               </li>
@@ -128,19 +154,25 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Typealiases.html">Typealiases</a>
+            <a class="nav-group-name-link" href="../Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura16LifecycleHandler">LifecycleHandler</a>
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura14HTTPStatusCodea">HTTPStatusCode</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura13RouterHandler">RouterHandler</a>
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura16LifecycleHandlera">LifecycleHandler</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura22RouterParameterHandler">RouterParameterHandler</a>
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura12RequestErrora">RequestError</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura17WrittenDataFilter">WrittenDataFilter</a>
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura13RouterHandlera">RouterHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura22RouterParameterHandlera">RouterParameterHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Kitura17WrittenDataFiltera">WrittenDataFilter</a>
               </li>
             </ul>
           </li>
@@ -153,7 +185,7 @@
             <h1>RouterMethod</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">RouterMethod</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">RouterMethod</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                 </div>
               </div>
@@ -172,9 +204,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod3allFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO3allA2CmF"></a>
                     <a name="//apple_ref/swift/Element/all" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod3allFMS0_S0_">all</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO3allA2CmF">all</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -189,7 +221,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">all</span> <span class="o">=</span> <span class="s">"ALL"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">all</span> <span class="o">=</span> <span class="s">"ALL"</span></code></pre>
 
                         </div>
                       </div>
@@ -203,9 +235,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod3getFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO3getA2CmF"></a>
                     <a name="//apple_ref/swift/Element/get" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod3getFMS0_S0_">get</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO3getA2CmF">get</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -220,7 +252,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="k">get</span> <span class="o">=</span> <span class="s">"GET"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="k">get</span> <span class="o">=</span> <span class="s">"GET"</span></code></pre>
 
                         </div>
                       </div>
@@ -234,9 +266,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod4postFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO4postA2CmF"></a>
                     <a name="//apple_ref/swift/Element/post" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod4postFMS0_S0_">post</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO4postA2CmF">post</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -251,7 +283,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">post</span> <span class="o">=</span> <span class="s">"POST"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">post</span> <span class="o">=</span> <span class="s">"POST"</span></code></pre>
 
                         </div>
                       </div>
@@ -265,9 +297,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod3putFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO3putA2CmF"></a>
                     <a name="//apple_ref/swift/Element/put" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod3putFMS0_S0_">put</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO3putA2CmF">put</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -282,7 +314,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">put</span> <span class="o">=</span> <span class="s">"PUT"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">put</span> <span class="o">=</span> <span class="s">"PUT"</span></code></pre>
 
                         </div>
                       </div>
@@ -296,9 +328,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod4headFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO4headA2CmF"></a>
                     <a name="//apple_ref/swift/Element/head" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod4headFMS0_S0_">head</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO4headA2CmF">head</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -313,7 +345,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">head</span> <span class="o">=</span> <span class="s">"HEAD"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">head</span> <span class="o">=</span> <span class="s">"HEAD"</span></code></pre>
 
                         </div>
                       </div>
@@ -327,9 +359,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod6deleteFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO6deleteA2CmF"></a>
                     <a name="//apple_ref/swift/Element/delete" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod6deleteFMS0_S0_">delete</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO6deleteA2CmF">delete</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -344,7 +376,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">delete</span> <span class="o">=</span> <span class="s">"DELETE"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">delete</span> <span class="o">=</span> <span class="s">"DELETE"</span></code></pre>
 
                         </div>
                       </div>
@@ -358,9 +390,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod7optionsFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO7optionsA2CmF"></a>
                     <a name="//apple_ref/swift/Element/options" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod7optionsFMS0_S0_">options</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO7optionsA2CmF">options</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -375,7 +407,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">options</span> <span class="o">=</span> <span class="s">"OPTIONS"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">options</span> <span class="o">=</span> <span class="s">"OPTIONS"</span></code></pre>
 
                         </div>
                       </div>
@@ -389,9 +421,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod5traceFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO5traceA2CmF"></a>
                     <a name="//apple_ref/swift/Element/trace" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod5traceFMS0_S0_">trace</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO5traceA2CmF">trace</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -406,7 +438,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">trace</span> <span class="o">=</span> <span class="s">"TRACE"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">trace</span> <span class="o">=</span> <span class="s">"TRACE"</span></code></pre>
 
                         </div>
                       </div>
@@ -420,9 +452,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod4copyFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO4copyA2CmF"></a>
                     <a name="//apple_ref/swift/Element/copy" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod4copyFMS0_S0_">copy</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO4copyA2CmF">copy</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -437,7 +469,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">copy</span> <span class="o">=</span> <span class="s">"COPY"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">copy</span> <span class="o">=</span> <span class="s">"COPY"</span></code></pre>
 
                         </div>
                       </div>
@@ -451,9 +483,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod4lockFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO4lockA2CmF"></a>
                     <a name="//apple_ref/swift/Element/lock" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod4lockFMS0_S0_">lock</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO4lockA2CmF">lock</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -468,7 +500,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">lock</span> <span class="o">=</span> <span class="s">"LOCK"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">lock</span> <span class="o">=</span> <span class="s">"LOCK"</span></code></pre>
 
                         </div>
                       </div>
@@ -482,9 +514,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod5mkColFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO5mkColA2CmF"></a>
                     <a name="//apple_ref/swift/Element/mkCol" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod5mkColFMS0_S0_">mkCol</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO5mkColA2CmF">mkCol</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -499,7 +531,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">mkCol</span> <span class="o">=</span> <span class="s">"MKCOL"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">mkCol</span> <span class="o">=</span> <span class="s">"MKCOL"</span></code></pre>
 
                         </div>
                       </div>
@@ -513,9 +545,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod4moveFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO4moveA2CmF"></a>
                     <a name="//apple_ref/swift/Element/move" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod4moveFMS0_S0_">move</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO4moveA2CmF">move</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -530,7 +562,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">move</span> <span class="o">=</span> <span class="s">"MOVE"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">move</span> <span class="o">=</span> <span class="s">"MOVE"</span></code></pre>
 
                         </div>
                       </div>
@@ -544,9 +576,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod5purgeFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO5purgeA2CmF"></a>
                     <a name="//apple_ref/swift/Element/purge" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod5purgeFMS0_S0_">purge</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO5purgeA2CmF">purge</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -561,7 +593,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">purge</span> <span class="o">=</span> <span class="s">"PURGE"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">purge</span> <span class="o">=</span> <span class="s">"PURGE"</span></code></pre>
 
                         </div>
                       </div>
@@ -575,9 +607,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod8propFindFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO8propFindA2CmF"></a>
                     <a name="//apple_ref/swift/Element/propFind" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod8propFindFMS0_S0_">propFind</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO8propFindA2CmF">propFind</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -592,7 +624,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">propFind</span> <span class="o">=</span> <span class="s">"PROPFIND"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">propFind</span> <span class="o">=</span> <span class="s">"PROPFIND"</span></code></pre>
 
                         </div>
                       </div>
@@ -606,9 +638,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod9propPatchFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO9propPatchA2CmF"></a>
                     <a name="//apple_ref/swift/Element/propPatch" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod9propPatchFMS0_S0_">propPatch</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO9propPatchA2CmF">propPatch</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -623,7 +655,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">propPatch</span> <span class="o">=</span> <span class="s">"PROPPATCH"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">propPatch</span> <span class="o">=</span> <span class="s">"PROPPATCH"</span></code></pre>
 
                         </div>
                       </div>
@@ -637,9 +669,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod6unlockFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO6unlockA2CmF"></a>
                     <a name="//apple_ref/swift/Element/unlock" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod6unlockFMS0_S0_">unlock</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO6unlockA2CmF">unlock</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -654,7 +686,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">unlock</span> <span class="o">=</span> <span class="s">"UNLOCK"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">unlock</span> <span class="o">=</span> <span class="s">"UNLOCK"</span></code></pre>
 
                         </div>
                       </div>
@@ -668,9 +700,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod6reportFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO6reportA2CmF"></a>
                     <a name="//apple_ref/swift/Element/report" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod6reportFMS0_S0_">report</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO6reportA2CmF">report</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -685,7 +717,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">report</span> <span class="o">=</span> <span class="s">"REPORT"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">report</span> <span class="o">=</span> <span class="s">"REPORT"</span></code></pre>
 
                         </div>
                       </div>
@@ -699,9 +731,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod10mkActivityFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO10mkActivityA2CmF"></a>
                     <a name="//apple_ref/swift/Element/mkActivity" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod10mkActivityFMS0_S0_">mkActivity</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO10mkActivityA2CmF">mkActivity</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -716,7 +748,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">mkActivity</span> <span class="o">=</span> <span class="s">"MKACTIVITY"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">mkActivity</span> <span class="o">=</span> <span class="s">"MKACTIVITY"</span></code></pre>
 
                         </div>
                       </div>
@@ -730,9 +762,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod8checkoutFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO8checkoutA2CmF"></a>
                     <a name="//apple_ref/swift/Element/checkout" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod8checkoutFMS0_S0_">checkout</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO8checkoutA2CmF">checkout</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -747,7 +779,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">checkout</span> <span class="o">=</span> <span class="s">"CHECKOUT"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">checkout</span> <span class="o">=</span> <span class="s">"CHECKOUT"</span></code></pre>
 
                         </div>
                       </div>
@@ -761,9 +793,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod5mergeFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO5mergeA2CmF"></a>
                     <a name="//apple_ref/swift/Element/merge" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod5mergeFMS0_S0_">merge</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO5mergeA2CmF">merge</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -778,7 +810,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">merge</span> <span class="o">=</span> <span class="s">"MERGE"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">merge</span> <span class="o">=</span> <span class="s">"MERGE"</span></code></pre>
 
                         </div>
                       </div>
@@ -792,9 +824,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod7mSearchFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO7mSearchA2CmF"></a>
                     <a name="//apple_ref/swift/Element/mSearch" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod7mSearchFMS0_S0_">mSearch</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO7mSearchA2CmF">mSearch</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -809,7 +841,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">mSearch</span> <span class="o">=</span> <span class="s">"MSEARCH"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">mSearch</span> <span class="o">=</span> <span class="s">"MSEARCH"</span></code></pre>
 
                         </div>
                       </div>
@@ -823,9 +855,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod6notifyFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO6notifyA2CmF"></a>
                     <a name="//apple_ref/swift/Element/notify" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod6notifyFMS0_S0_">notify</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO6notifyA2CmF">notify</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -840,7 +872,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">notify</span> <span class="o">=</span> <span class="s">"NOTIFY"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">notify</span> <span class="o">=</span> <span class="s">"NOTIFY"</span></code></pre>
 
                         </div>
                       </div>
@@ -854,9 +886,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod9subscribeFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO9subscribeA2CmF"></a>
                     <a name="//apple_ref/swift/Element/subscribe" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod9subscribeFMS0_S0_">subscribe</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO9subscribeA2CmF">subscribe</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -871,7 +903,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">subscribe</span> <span class="o">=</span> <span class="s">"SUBSCRIBE"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">subscribe</span> <span class="o">=</span> <span class="s">"SUBSCRIBE"</span></code></pre>
 
                         </div>
                       </div>
@@ -885,9 +917,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod11unsubscribeFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO11unsubscribeA2CmF"></a>
                     <a name="//apple_ref/swift/Element/unsubscribe" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod11unsubscribeFMS0_S0_">unsubscribe</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO11unsubscribeA2CmF">unsubscribe</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -902,7 +934,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">unsubscribe</span> <span class="o">=</span> <span class="s">"UNSUBSCRIBE"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">unsubscribe</span> <span class="o">=</span> <span class="s">"UNSUBSCRIBE"</span></code></pre>
 
                         </div>
                       </div>
@@ -916,9 +948,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod5patchFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO5patchA2CmF"></a>
                     <a name="//apple_ref/swift/Element/patch" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod5patchFMS0_S0_">patch</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO5patchA2CmF">patch</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -933,7 +965,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">patch</span> <span class="o">=</span> <span class="s">"PATCH"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">patch</span> <span class="o">=</span> <span class="s">"PATCH"</span></code></pre>
 
                         </div>
                       </div>
@@ -947,9 +979,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod6searchFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO6searchA2CmF"></a>
                     <a name="//apple_ref/swift/Element/search" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod6searchFMS0_S0_">search</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO6searchA2CmF">search</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -964,7 +996,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">search</span> <span class="o">=</span> <span class="s">"SEARCH"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">search</span> <span class="o">=</span> <span class="s">"SEARCH"</span></code></pre>
 
                         </div>
                       </div>
@@ -978,9 +1010,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod7connectFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO7connectA2CmF"></a>
                     <a name="//apple_ref/swift/Element/connect" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod7connectFMS0_S0_">connect</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO7connectA2CmF">connect</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -995,7 +1027,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">connect</span> <span class="o">=</span> <span class="s">"CONNECT"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">connect</span> <span class="o">=</span> <span class="s">"CONNECT"</span></code></pre>
 
                         </div>
                       </div>
@@ -1009,9 +1041,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod5errorFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO5errorA2CmF"></a>
                     <a name="//apple_ref/swift/Element/error" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod5errorFMS0_S0_">error</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO5errorA2CmF">error</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1026,7 +1058,7 @@ between paths and handlers or middleware. They are:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">error</span> <span class="o">=</span> <span class="s">"ERROR"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">error</span> <span class="o">=</span> <span class="s">"ERROR"</span></code></pre>
 
                         </div>
                       </div>
@@ -1040,9 +1072,9 @@ between paths and handlers or middleware. They are:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO6Kitura12RouterMethod7unknownFMS0_S0_"></a>
+                    <a name="/s:6Kitura12RouterMethodO7unknownA2CmF"></a>
                     <a name="//apple_ref/swift/Element/unknown" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO6Kitura12RouterMethod7unknownFMS0_S0_">unknown</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO7unknownA2CmF">unknown</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1058,7 +1090,7 @@ values.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">unknown</span> <span class="o">=</span> <span class="s">"UNKNOWN"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">unknown</span> <span class="o">=</span> <span class="s">"UNKNOWN"</span></code></pre>
 
                         </div>
                       </div>
@@ -1072,9 +1104,9 @@ values.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vO6Kitura12RouterMethod11descriptionSS"></a>
+                    <a name="/s:6Kitura12RouterMethodO11descriptionSSvp"></a>
                     <a name="//apple_ref/swift/Property/description" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vO6Kitura12RouterMethod11descriptionSS">description</a>
+                    <a class="token" href="#/s:6Kitura12RouterMethodO11descriptionSSvp">description</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1089,7 +1121,7 @@ values.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -1104,8 +1136,8 @@ values.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2016-12-16)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2018-06-01)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

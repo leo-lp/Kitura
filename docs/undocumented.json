@@ -1,1 +1,26 @@
-{"warnings":[{"file":"/Users/kallner/Projects/SwiftAtBackend/code/kitura-dev/Kitura/Sources/Kitura/RouterParameterWalker.swift","line":17,"symbol":"RouterParameterHandler","symbol_kind":"source.lang.swift.decl.typealias","warning":"undocumented"},{"file":"/Users/kallner/Projects/SwiftAtBackend/code/kitura-dev/Kitura/Sources/Kitura/RouterResponse.swift","line":317,"symbol":"render(_:context:)","symbol_kind":"source.lang.swift.decl.function.method.instance","warning":"undocumented"},{"file":"/Users/kallner/Projects/SwiftAtBackend/code/kitura-dev/Kitura/Sources/Kitura/SSLConfig.swift","line":21,"symbol":"SSLConfig","symbol_kind":"source.lang.swift.decl.struct","warning":"undocumented"},{"file":"/Users/kallner/Projects/SwiftAtBackend/code/kitura-dev/Kitura/Sources/Kitura/SSLConfig.swift","line":25,"symbol":"config","symbol_kind":"source.lang.swift.decl.var.instance","warning":"undocumented"}],"source_directory":"/Users/kallner/Projects/SwiftAtBackend/code/kitura-dev/Kitura"}
+{
+  "warnings": [
+    {
+      "file": "/Users/travis/build/IBM-Swift/Kitura/Sources/Kitura/CodableRouter.swift",
+      "line": 623,
+      "symbol": "CodableHelpers",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/IBM-Swift/Kitura/Sources/Kitura/bodyParser/BodyParser.swift",
+      "line": 199,
+      "symbol": "BodyParserMultiValue",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/IBM-Swift/Kitura/Sources/Kitura/staticFileServer/StaticFileServer.swift",
+      "line": 75,
+      "symbol": "StaticFileServer.absoluteRootPath",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/travis/build/IBM-Swift/Kitura"
+}

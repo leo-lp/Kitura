@@ -1,5 +1,6 @@
+
 /*
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2016, 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,8 +27,8 @@ extension StaticFileServer {
 
         static func getAbsolutePath(for path: String) -> String {
             var path = path
-            if path.hasSuffix(separator) {
-                path = String(path.characters.dropLast())
+            if path.hasSuffix(separator) && path != separator {
+                path = String(path.dropLast())
             }
 
             // If we received a path with a tilde (~) in the front, expand it.
@@ -37,10 +38,17 @@ extension StaticFileServer {
                 return path
             }
 
-
             let fileManager = FileManager()
+            let absolutePath: String
+            #if os(iOS)
+                guard let resourcePath = Bundle.main.resourcePath else {
+                    return path
+                }
+                absolutePath = resourcePath + separator + path
+            #else
+                absolutePath = fileManager.currentDirectoryPath + separator + path
+            #endif
 
-            let absolutePath = fileManager.currentDirectoryPath + separator + path
             if fileManager.fileExists(atPath: absolutePath) {
                 return absolutePath
             }
@@ -61,7 +69,7 @@ extension StaticFileServer {
             let currentFilePath = #file
 
             var pathComponents =
-                currentFilePath.characters.split(separator: separatorCharacter).map(String.init)
+                currentFilePath.split(separator: separatorCharacter).map(String.init)
             let numberOfComponentsFromKituraRepositoryDirectoryToThisFile = 4
 
             guard pathComponents.count >= numberOfComponentsFromKituraRepositoryDirectoryToThisFile else {
@@ -77,20 +85,25 @@ extension StaticFileServer {
 
         static private func removePackagesDirectory(pathComponents: [String]) -> [String] {
             var pathComponents = pathComponents
-            let numberOfComponentsFromKituraPackageToDependentRepository = 2
+            let numberOfComponentsFromKituraPackageToDependentRepository = 3
             let packagesComponentIndex = pathComponents.endIndex - numberOfComponentsFromKituraPackageToDependentRepository
             if pathComponents.count > numberOfComponentsFromKituraPackageToDependentRepository &&
-                 pathComponents[packagesComponentIndex] == "Packages" {
+                pathComponents[packagesComponentIndex] == ".build"  &&
+                pathComponents[packagesComponentIndex+1] == "checkouts" {
                 pathComponents.removeLast(numberOfComponentsFromKituraPackageToDependentRepository)
+            }
+            else {
+                let numberOfComponentsFromEditableKituraPackageToDependentRepository = 2
+                let editablePackagesComponentIndex = pathComponents.endIndex - numberOfComponentsFromEditableKituraPackageToDependentRepository
+                if pathComponents.count > numberOfComponentsFromEditableKituraPackageToDependentRepository &&
+                    pathComponents[editablePackagesComponentIndex] == "Packages" {
+                    pathComponents.removeLast(numberOfComponentsFromEditableKituraPackageToDependentRepository)
+                }
             }
             return pathComponents
         }
         static private func isAbsolute(path: String) -> Bool {
             return path.hasPrefix(separator)
-        }
-
-        static private func isSeparator(_ string: String) -> Bool {
-            return string == separator
         }
     }
 }
